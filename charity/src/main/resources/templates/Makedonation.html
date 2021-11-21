@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/css/make_donation_style.css">
+
+
+    <title>Make Donation</title>
+</head>
+
+<body>
+        <!-- NAVBAR -->
+        <nav class="navbar navbar-expand-lg py-3 sticky-top navbar-light bg-white">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img class="logo" src="../images/logo.png" width="45" alt="">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">about</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link">Welcome Back</a>
+                        </li>
+                    </ul>
+                    <a href="C:\Users\sagar\OneDrive\Desktop\ooad_project\index.html">
+                        <button class="btn btn-primary ms-lg-3">Logout</button>
+                    </a>
+    
+                </div>
+            </div>
+        </nav><!-- //NAVBAR -->
+      <div th:if="${param.success}">
+						<div class="alert alert-info"><div class=" text-center mt-5 "><h3>Thanks for placing donation!!!</h3></div></div>
+						 <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="form-group"> <label for="form_message" th:text="${donate.othercategory}"><h4>Other Category</h4></label> </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group"> <label for="form_message" th:text="${donate.description}">Description</label>  </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group"> <label for="form_message" th:text="${donate.comment}">Comment</label> </div>
+                                        </div>
+                                    </div>
+                                    
+      </div>
+
+        <!-- form -->
+        <div class="container"> <div class=" text-center mt-5 ">
+            <h1>Make Donation</h1>
+        </div>
+        <div class="row ">
+            <div class="col-lg-7 mx-auto">
+                <div class="card mt-8 mx-auto p-8 bg-transparent">
+                    <div class="card-body bg-transparent">
+                        <div class="container">
+                        
+                            <form id="Donation-form" role="form" th:action="@{makedonation}" method="post" th:object="${donate}">
+                                <div class="controls">
+                                    <div class="row">        
+                                        <div class="col-md-6">
+                                            <div class="form-group"> <label for="form_need">Select Category Of Donation</label> 
+                                            <select  id="form_category" name="category" class="form-control" th:field="*{donationcategory}" >
+                                                    <option value=" selected disabled">--Select Category</option>
+                                                    <option th:each="categories:${categoryname}"
+                                                    		th:value="${categories}"
+                                                    		th:utext="${categories}"/>
+                                                 <!--    <option class="users" value="clothes">Donate Cloths</option>
+                                                    <option value="books">Donate Books</option>
+                                                    <option value="food">Donate Food</option>
+                                                    <option value="others">Others</option>  -->
+                                                </select>
+                                            </div>
+                                        </div>    
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="form-group"> <label for="form_message"> If others (please specify)</label> <textarea id="form_message" name="message" class="form-control" placeholder="Please enter category(if others)" rows="2" th:field="*{othercategory}"></textarea> </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group"> <label for="form_message">Description</label> <textarea id="form_description" name="description" class="form-control" placeholder="Write Description here" rows="4" th:field="*{description}"></textarea> </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group"> <label for="form_message">Comment</label> <textarea id="form_comment" name="comment" class="form-control" placeholder="Write your comment here" rows="4" th:field="*{comment}"></textarea> </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" >
+                                        <div align="right" >
+                                            <button class="btn btn-primary ">Donate With A Smile
+                                                <i class='bx bxs-smile'></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div> <!-- /.8 -->
+            </div> <!-- /.row-->
+        </div>
+    </div>
+    
+    <footer class="page-footer font-small ">
+
+        <!-- Copyright -->            
+        
+        <div class="footer-copyright text-center py-3 blue">© 2021 Copyright:
+            <a href="#">HelpingHands.com</a>
+            <ul>
+                <li><a href="#">Feedback</a></li>
+
+            </ul>
+            
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+    <!-- Footer -->
+
+</body>
