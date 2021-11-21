@@ -12,26 +12,32 @@ public class Admin {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String adname;
-	private String adpassword;
+	private long id;
+	private String username;
+	private String password;
 	
-	public Admin(String adname, String adpassword) {
+	public Admin() {
 		
-		this.adname = adname;
-		this.adpassword = adpassword;
+	}
+	public Admin(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
-	public String getAdname() {
-		return adname;
+	public String getPassword() {
+		return password;
 	}
-	public void setAdname(String adname) {
-		this.adname = adname;
+	public void setPassword(String password) {
+		this.password = password;
 	}
-	public String getAdpassword() {
-		return adpassword;
-	}
-	public void setAdpassword(String adpassword) {
-		this.adpassword = adpassword;
-	}
+	
+	
 
 }

@@ -26,10 +26,10 @@ public class MainController {
 		return "index";
 	}
 	
-	@GetMapping("/adminlogin")
+	/*@GetMapping("/adminlogin")
 	public String adloginpage() {
 		return "adminlogin";
-	}
+	}*/
 	
 		
 	

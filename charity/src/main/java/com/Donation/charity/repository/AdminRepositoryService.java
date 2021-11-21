@@ -6,5 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.Donation.charity.entities.Admin;
 @Repository
 public interface AdminRepositoryService extends JpaRepository<Admin, Long>{
-	Admin findByAdname(String adname);
+	//Admin findByAdname(String adname);
+
+	Admin findByUsernameAndPassword(String username, String password);
 }
