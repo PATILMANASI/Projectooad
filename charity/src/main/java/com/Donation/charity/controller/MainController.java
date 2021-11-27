@@ -52,6 +52,11 @@ public class MainController {
 	public String showMakeDonation() {
 		return "makedonation";
 	}*/
+	
+	@GetMapping("/donornewlogin")
+	public String showPage() {
+		return "donor_login_new";
+	}
 
 	
 

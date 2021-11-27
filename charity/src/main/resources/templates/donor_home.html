@@ -39,8 +39,8 @@
                             <a class="nav-link">Welcome Back</a>
                         </li>
                     </ul>
-                    <a href="C:\Users\sagar\OneDrive\Desktop\ooad_project\index.html">
-                        <button class="btn btn-primary ms-lg-3">Logout</button>
+                    <a th:href="@{/logout}">>
+                        <button sec:authorize="isAuthenticated()" class="btn btn-primary ms-lg-3">Logout</button>
                     </a>
     
                 </div>

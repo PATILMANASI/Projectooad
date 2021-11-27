@@ -1,19 +1,32 @@
 package com.Donation.charity.entities;
 
+
+
+import java.util.Collection;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+
+
 @Entity
-@Table(name="ProjectDonors",uniqueConstraints = @UniqueConstraint(columnNames = "dremail"))
+@Table(name="ProjectDonorsNew",uniqueConstraints = @UniqueConstraint(columnNames = "dremail"))
 public class Donor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long donorid;
+	private int id;
 	
+	
+
 	private String drname;
 	private String dremail;
 	private String drpassword;
@@ -23,12 +36,24 @@ public class Donor {
 	private String drpincode;
 	private String draddress;
 	
+	 @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	    @JoinTable(
+	        name = "users_roles_new",
+	        joinColumns = @JoinColumn(
+	            name = "users_id", referencedColumnName = "id"),
+	        inverseJoinColumns = @JoinColumn(
+	            name = "roles_id", referencedColumnName = "id"))
+	
+	 private Collection < UserRole > userroles;
+	 
+	
+	
 public Donor() {
 		
 	}
 	
 	public Donor(String drname, String dremail, String drpassword,String drrepass, String drcity, String drphone, String drpincode,
-			String draddress) {
+			String draddress, Collection < UserRole > userroles) {
 		super();
 		this.drname = drname;
 		this.dremail = dremail;
@@ -38,6 +63,14 @@ public Donor() {
 		this.drphone = drphone;
 		this.drpincode = drpincode;
 		this.draddress = draddress;
+		this.userroles=userroles;
+	}
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	public String getDrname() {
@@ -102,6 +135,14 @@ public Donor() {
 
 	public void setDrrepass(String drrepass) {
 		this.drrepass = drrepass;
+	}
+
+	public Collection < UserRole > getUserroles() {
+		return userroles;
+	}
+
+	public void setUserroles(Collection < UserRole > userroles) {
+		this.userroles = userroles;
 	}
 
 	
