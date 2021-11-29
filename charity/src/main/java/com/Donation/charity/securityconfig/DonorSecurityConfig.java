@@ -29,7 +29,7 @@ public class DonorSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-            .antMatchers("/","/donorsignin**","/admin**",
+            .antMatchers("/","/donorsignin**","/admin**","/verifyNGO**","/ngologin","/ngosignin",
                 "/registration**",
                 "/js/**",
                 "/css/**",

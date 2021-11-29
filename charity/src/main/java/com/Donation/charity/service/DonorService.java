@@ -14,6 +14,7 @@ import com.Donation.charity.entities.Donor;
 
 public interface DonorService extends UserDetailsService{
 	Donor save(Donor donorreg);
+//	public List<Donor> getAllDonors();
 	//Donor save(Donor donoreg);
 	//public Donor addDonor(Donor donor);
 	//public List<Donor> getDonors();

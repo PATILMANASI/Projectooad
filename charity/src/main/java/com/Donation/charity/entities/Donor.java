@@ -2,7 +2,11 @@ package com.Donation.charity.entities;
 
 
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -13,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -38,13 +43,20 @@ public class Donor {
 	
 	 @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	    @JoinTable(
-	        name = "users_roles_new",
+	        name = "donors_roles_new",
 	        joinColumns = @JoinColumn(
-	            name = "users_id", referencedColumnName = "id"),
+	            name = "donors_id", referencedColumnName = "id"),
 	        inverseJoinColumns = @JoinColumn(
 	            name = "roles_id", referencedColumnName = "id"))
 	
 	 private Collection < UserRole > userroles;
+	 
+	
+
+/*	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	 @JoinColumn(name = "donor_fid", referencedColumnName = "id")
+	 private Set<Donation> donations=new HashSet<>();*/
+	 
 	 
 	
 	

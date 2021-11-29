@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,8 +38,9 @@ public class MainController {
 	
 	@GetMapping("/ngologin")
 	public String ngologinpage() {
-		return "ngologin";
+		return "NGO_login";
 	}
+	
 	
 	@GetMapping("/DAlogin")
 	public String DAloginpage() {
@@ -56,6 +58,12 @@ public class MainController {
 	@GetMapping("/donornewlogin")
 	public String showPage() {
 		return "donor_login_new";
+	}
+	
+	@GetMapping("/verifyNGO")
+	public String listNGOs(Model model) {
+		model.addAttribute("listDonors",donorservice.getAllDonors());
+		return "verify_ngo";
 	}
 
 	
