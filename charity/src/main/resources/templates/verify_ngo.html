@@ -22,26 +22,26 @@
 				<tr>
 					<th>
 						<!--  <a th:href="@{'/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${reverseSortDir}}">-->
-							Donor Name
+							NGO Name
 					</th>
 					<th>
 					<!--<a th:href="@{'/page/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${reverseSortDir}}">-->
-							Donor city
+							NGO registration Number
 					</th>
 					<th>
 				<!--	<a th:href="@{'/page/' + ${currentPage} + '?sortField=email&sortDir=' + ${reverseSortDir}}">-->
-							Donor Email
+							NGO Registration date
 					</th>
 					<th> Actions </th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="donors : ${listDonors}">
-					<td th:text="${donors.drname}"></td>
-					<td th:text="${donors.drcity}"></td>
-					<td th:text="${donors.dremail}"></td>
-					<td> <a class="btn btn-primary">Verified</a>
-					    <a class="btn btn-danger">Delete</a>
+				<tr th:each="ngos : ${listNGOs}">
+					<td th:text="${ngos.ngoname}"></td>
+					<td th:text="${ngos.ngoregistrationnumber}"></td>
+					<td th:text="${ngos.ngoregdate}"></td>
+					<td> <a class="btn btn-primary" th:href="@{/markNGOVerified/{id}(id=${ngos.id})}">Accept</a>
+					    <a class="btn btn-danger">Reject</a>
 					</td>
 				</tr>
 			</tbody>

@@ -1,21 +1,30 @@
 package com.Donation.charity.entities;
 
+import java.util.Collection;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.ColumnDefault;
 
 @Entity
-@Table(name="Project_NGOs",uniqueConstraints = @UniqueConstraint(columnNames = "ngoemail"))
+@Table(name="Project_NGOs_new",uniqueConstraints = @UniqueConstraint(columnNames = "ngoemail"))
 public class NGO {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
+	private String ngoregstatus="NotVerified";
 	private String ngoname;
 	private String ngoregistrationnumber;
 	private String ngoregdate;
@@ -28,14 +37,26 @@ public class NGO {
 	private String ngoaddress;
 	
 	//@Column(columnDefinition = "varchar(255) default 'NotVerified'")
-	private String ngoregstatus="NotVerified";
+
 	
+	 @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	    @JoinTable(
+	        name = "NGO_roles_new",
+	        joinColumns = @JoinColumn(
+	            name = "ngo_id", referencedColumnName = "id"),
+	        inverseJoinColumns = @JoinColumn(
+	            name = "role_id", referencedColumnName = "id"))
+	
+	 private Collection < NGORole > ngoroles;
+	
+	
+
 	public NGO() {
 		
 	}
 	
 	public NGO(String ngoname, String ngoregistrationnumber, String ngoregdate, String ngoemail, String ngopassword,
-			String ngorepassword, String ngophone, String ngocity, String ngopincode, String ngoaddress) {
+			String ngorepassword, String ngophone, String ngocity, String ngopincode, String ngoaddress,Collection < NGORole > ngoroles) {
 		super();
 		this.ngoname = ngoname;
 		this.ngoregistrationnumber = ngoregistrationnumber;
@@ -47,6 +68,7 @@ public class NGO {
 		this.ngocity = ngocity;
 		this.ngopincode = ngopincode;
 		this.ngoaddress = ngoaddress;
+		this.ngoroles=ngoroles;
 		
 	}
 
@@ -147,7 +169,14 @@ public class NGO {
 	public void setNgoregstatus(String ngoregstatus) {
 		this.ngoregstatus = ngoregstatus;
 	}
+	
+	public Collection<NGORole> getNgoroles() {
+		return ngoroles;
+	}
 
+	public void setNgoroles(Collection<NGORole> ngoroles) {
+		this.ngoroles = ngoroles;
+	}
 
 
 }

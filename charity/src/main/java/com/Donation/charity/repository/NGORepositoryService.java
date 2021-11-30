@@ -5,18 +5,14 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.Donation.charity.entities.Admin;
 import com.Donation.charity.entities.Donor;
-
-
+import com.Donation.charity.entities.NGO;
 
 @Repository
-public interface RepositoryService extends JpaRepository<Donor, Integer> {
+public interface NGORepositoryService extends JpaRepository<NGO, Integer> {
 
-
-	
-	Donor findByDremail(String dremail);
-
+	List<NGO> findByNgoregstatus(String name);
+	NGO findByNgoemail(String username);
 	
 
 }

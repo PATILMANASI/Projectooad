@@ -52,50 +52,55 @@
 					<div class="row">
 						<h2>New NGO</h2>
 					</div>
+					</div>
+					 <!-- success message -->
+                    <div th:if="${param.success}">
+						<div class="alert alert-info">You've successfully registered to Helping Hands!</div>
+			        </div>
 					<div class="row">
-                        <form control="" class="form-group">
+                        <form control="" class="form-group" th:action="@{ngosignin}" method="post" th:object="${ngo}">
 						<div class="sign-up-form">
                             <div class="row">
-								<input type="text" name="name" id="name" class="form__input" placeholder="Enter NGO Name">
+								<input type="text" name="name" id="name" class="form__input" th:field="*{ngoname}" placeholder="Enter NGO Name">
 							</div>
                             
                             <div class="row">
-								<input type="number" name="reg_num" id="reg_num" class="form__input" placeholder="Enter NGO Registration Number">
+								<input type="number" name="reg_num" id="reg_num" class="form__input" th:field="*{ngoregistrationnumber}" placeholder="Enter NGO Registration Number">
 							</div>
 
                             <div class="row">
-								<input type="date" name="reg_date" id="reg_date" class="form__input" placeholder="Enter NGO Registration Date" pattern="\d{4}-\d{2}-\d{2}">
+								<input type="date" name="reg_date" id="reg_date" class="form__input" th:field="*{ngoregdate}" placeholder="Enter NGO Registration Date" pattern="\d{4}-\d{2}-\d{2}">
                                 
 							</div>
 
                             <div class="row">
-								<input type="email" name="email" id="email" class="form__input" placeholder="Enter NGO Official Email">
+								<input type="email" name="email" id="email" class="form__input" th:field="*{ngoemail}" placeholder="Enter NGO Official Email">
 							</div>
 
 							<div class="row">
 								<!-- <span class="fa fa-lock"></span> -->
-								<input type="password" name="password" id="password" class="form__input" placeholder="Enter Password">
+								<input type="password" name="password" id="password" class="form__input" th:field="*{ngopassword}" placeholder="Enter Password">
 							</div>
 
                             <div class="row">
 								<!-- <span class="fa fa-lock"></span> -->
-								<input type="password" name="password" id="password" class="form__input" placeholder="Repeat Password">
+								<input type="password" name="password" id="password" class="form__input" th:field="*{ngorepassword}" placeholder="Repeat Password">
 							</div>
 
 							<div class="row">
-								<input type="tel" name="telphone" placeholder="Mobile number" pattern="[0-9]{10}" maxlength="10" class="form__input">
+								<input type="tel" name="telphone" placeholder="Mobile number" th:field="*{ngophone}"  maxlength="10" class="form__input">
 							</div>
 
                             <div class="row">
-								<input type="text" name="city" id="city" class="form__input" placeholder="Enter City">
+								<input type="text" name="city" id="city" class="form__input" placeholder="Enter City" th:field="*{ngocity}">
 							</div>
 
                             <div class="row">
-								<input type="text" name="Address" id="Address" class="form__input" placeholder="Enter Full Address">
+								<input type="text" name="Address" id="Address" class="form__input" placeholder="Enter Full Address" th:field="*{ngoaddress}">
 							</div>
 
                             <div class="row">
-								<input type="number" name="Pincode" id="Pincode" class="form__input" placeholder="Enter Pincode" pattern="[0-9]{4}" maxlength="5">
+								<input type="number" name="Pincode" id="Pincode" class="form__input" placeholder="Enter Pincode" th:field="*{ngopincode}" pattern="[0-9]{4}" maxlength="5">
 							</div>
 
                             <div class="row">

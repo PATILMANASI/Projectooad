@@ -1,6 +1,5 @@
 package com.Donation.charity.securityconfig;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,17 +12,16 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import com.Donation.charity.service.DonorService;
 
-
+import com.Donation.charity.service.NGOService;
 
 @Configuration
 @EnableWebSecurity
-@Order(1)
-public class DonorSecurityConfig extends WebSecurityConfigurerAdapter {
+@Order(2)
+public class NGOSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private DonorService donorService;
+    private NGOService ngoservice;
 
     
 
@@ -31,8 +29,8 @@ public class DonorSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-            .antMatchers("/","/donorsignin**","/admin**","/verifyNGO**","/ngologin","/ngosignin","/donorsignin","/markNGOVerified/{id}",
-                "/registration**","redirect:/verifyNGO",
+            .antMatchers("/","/donorsignin**","/admin**","/donornewlogin","/ngosignin","/donorsignin","/markNGOVerified/{id}",
+                "/registration**","redirect:/verifyNGO","/",
                 "/js/**",
                 "/css/**",
                 "/images/**").permitAll()
@@ -40,8 +38,8 @@ public class DonorSecurityConfig extends WebSecurityConfigurerAdapter {
             .anyRequest().authenticated()
             .and()
             .formLogin()
-            .loginPage("/donornewlogin")
-            .defaultSuccessUrl("/donorhome",true)
+            .loginPage("/ngologin")
+            .defaultSuccessUrl("/verifyNGO",true)
             .permitAll()
             .and()
             .logout()
@@ -53,20 +51,20 @@ public class DonorSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
+    public BCryptPasswordEncoder passwordEncoderNGO() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public DaoAuthenticationProvider authenticationProvider() {
+    public DaoAuthenticationProvider authenticationProviderNgo() {
         DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
-        auth.setUserDetailsService(donorService);
-        auth.setPasswordEncoder(passwordEncoder());
+        auth.setUserDetailsService(ngoservice);
+        auth.setPasswordEncoder(passwordEncoderNGO());
         return auth;
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(authenticationProvider());
+        auth.authenticationProvider(authenticationProviderNgo());
     }
 }

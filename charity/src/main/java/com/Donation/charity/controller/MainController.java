@@ -60,11 +60,7 @@ public class MainController {
 		return "donor_login_new";
 	}
 	
-	@GetMapping("/verifyNGO")
-	public String listNGOs(Model model) {
-		model.addAttribute("listDonors",donorservice.getAllDonors());
-		return "verify_ngo";
-	}
+
 
 	
 
