@@ -48,7 +48,7 @@ public class NGOServiceImpl implements NGOService {
 
 	@Override
 	public NGO saveNGODetails(NGO ngoreg) {
-		NGO ngo=new NGO(ngoreg.getNgoname(),ngoreg.getNgoregistrationnumber(),ngoreg.getNgoregdate(),ngoreg.getNgoemail(),ngoreg.getNgopassword(),ngoreg.getNgorepassword(),ngoreg.getNgophone(),ngoreg.getNgocity(),ngoreg.getNgopincode(),ngoreg.getNgoaddress(),Arrays.asList(new NGORole("USER")));
+		NGO ngo=new NGO(ngoreg.getNgoname(),ngoreg.getNgoregistrationnumber(),ngoreg.getNgoregdate(),ngoreg.getNgoemail(),passwordEncoder.encode(ngoreg.getNgopassword()),ngoreg.getNgorepassword(),ngoreg.getNgophone(),ngoreg.getNgocity(),ngoreg.getNgopincode(),ngoreg.getNgoaddress(),Arrays.asList(new NGORole("USER")));
 		return ngorepo.save(ngo);
 	}
 

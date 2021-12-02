@@ -12,16 +12,14 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-
-import com.Donation.charity.service.NGOService;
+import com.Donation.charity.service.DAService;
 
 @Configuration
 @EnableWebSecurity
-@Order(3)
-public class NGOSecurityConfig extends WebSecurityConfigurerAdapter {
-
-    @Autowired
-    private NGOService ngoservice;
+@Order(1)
+public class DASecurityConfig extends WebSecurityConfigurerAdapter {
+	@Autowired
+    private DAService daservice;
 
     
 
@@ -29,8 +27,8 @@ public class NGOSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-            .antMatchers("/","/donorsignin**","/admin**","/donornewlogin","/ngosignin","/DAlogin","/dasignin","/donorsignin","/markDAVerified/{id}","/markNGOVerified/{id}",
-                "/registration**","redirect:/verifyNGO","redirect:/verifyDA","/",
+            .antMatchers("/","/donorsignin**","/admin**","/donornewlogin","/dasignin","/ngologin","/ngosignin","/donorsignin","/markNGOVerified/{id}","/markDAVerified/{id}",
+                "/registration**","redirect:/verifyDA","redirect:/verifyNGO","/",
                 "/js/**",
                 "/css/**",
                 "/images/**").permitAll()
@@ -38,8 +36,8 @@ public class NGOSecurityConfig extends WebSecurityConfigurerAdapter {
             .anyRequest().authenticated()
             .and()
             .formLogin()
-            .loginPage("/ngologin")
-            .defaultSuccessUrl("/verifyNGO",true)
+            .loginPage("/DAlogin")
+            .defaultSuccessUrl("/donorhome",true)
             .permitAll()
             .and()
             .logout()
@@ -51,20 +49,21 @@ public class NGOSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public BCryptPasswordEncoder passwordEncoderNGO() {
+    public BCryptPasswordEncoder passwordEncoderDA() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public DaoAuthenticationProvider authenticationProviderNgo() {
+    public DaoAuthenticationProvider authenticationProviderDA() {
         DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
-        auth.setUserDetailsService(ngoservice);
-        auth.setPasswordEncoder(passwordEncoderNGO());
+        auth.setUserDetailsService(daservice);
+        auth.setPasswordEncoder(passwordEncoderDA());
         return auth;
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(authenticationProviderNgo());
+        auth.authenticationProvider(authenticationProviderDA());
     }
+
 }
