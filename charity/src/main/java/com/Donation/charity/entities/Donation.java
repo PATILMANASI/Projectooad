@@ -33,7 +33,7 @@ public class Donation {
 	 */
 	private String othercategory;
 
-    
+    private String city;
 
 	private String comment;
 //	private String username;
@@ -68,13 +68,14 @@ public class Donation {
 
 
 	public Donation(int donor_id, String description, String othercategory, String comment,
-			DonationCategory donationcategory) {
+			DonationCategory donationcategory,String city) {
 		super();
 		this.donor_id = donor_id;
 		this.description = description;
 		this.othercategory = othercategory;
 		this.comment = comment;
 		this.donationcategory = donationcategory;
+		this.city=city;
 	}
 
 
@@ -125,6 +126,18 @@ public class Donation {
 	}
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+
+
+	public String getCity() {
+		return city;
+	}
+
+
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 	
