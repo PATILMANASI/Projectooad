@@ -60,7 +60,10 @@ public class MainController {
 		return "donor_login_new";
 	}
 	
-
+	@GetMapping("/feedback")
+	public String showFeedbackPage() {
+		return "feedback";
+	}
 
 	
 

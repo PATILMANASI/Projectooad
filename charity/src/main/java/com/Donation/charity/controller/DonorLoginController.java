@@ -13,22 +13,22 @@ import com.Donation.charity.service.DonorServiceImpl;
 
 
 @Controller
-@RequestMapping("/donorsignin")
+@RequestMapping("/donorsignin")   
 public class DonorLoginController {
-	private DonorService donorservice;
-
-	public DonorLoginController(DonorService donorservice) {
+	private DonorService donorservice;   
+ 
+	public DonorLoginController(DonorService donorservice) { 
 		super();
 		this.donorservice = donorservice;
 	}
-    @ModelAttribute("donor")
+    @ModelAttribute("donor") 
 	public Donor donorreg() {
 		return new Donor();
 	}
     
     @GetMapping
 	public String showRegForm() {
-		return "donor_signin_new";
+		return "donor_signin_new";  
 	}
 	
 	@PostMapping
@@ -36,6 +36,6 @@ public class DonorLoginController {
 		donorservice.save(donorreg);
 		//return "donorlist";
 		//return "redirect:/registration?success";
-		return "redirect:/donorsignin?success";
+		return "redirect:/donorsignin?success"; 
 }
 }

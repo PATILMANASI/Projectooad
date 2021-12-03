@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/css/feedback_style.css">
+
+
+    <title>Feedback</title>
+</head>
+
+<body>
+        <!-- NAVBAR -->
+        <nav class="navbar navbar-expand-lg py-3 sticky-top navbar-light bg-white">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img class="logo" src="/images/logo.png" width="45" alt="">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">about</a>
+                        </li>
+                    </ul>
+                    <a th:href="@{/adminlogin}">
+                        <button class="btn btn-primary ms-lg-3">ADMIN</button>
+                    </a>
+    
+                </div>
+            </div>
+        </nav><!-- //NAVBAR -->
+
+
+        <!-- form -->
+        <div class="container"> <div class=" text-center mt-5 ">
+            <h1>FEEDBACK</h1>
+        </div>
+        <div class="row ">
+            <div class="col-lg-7 mx-auto">
+                <div class="card mt-8 mx-auto p-8 bg-transparent border-0 ">
+                    <div class="card-body bg-transparent">
+                        <div class="container">
+                            <form id="Donation-form" role="form">
+                                <div class="controls">
+                                    
+                                    
+                                    <!-- success message -->
+				                    <div th:if="${param.success}">
+										<div class="alert alert-info">Thank you! your feedback is important to us.</div>
+							        </div><!-- /success message -->
+                                    
+                                    <form control="" class="form-group" th:action="@{feedbackform}" method="post" th:object="${feedback1}">
+                                    
+                                    
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="form-group"> <label for="name">Name</label> <textarea id="name" name="message" class="form-control" th:field="*{fdname}" placeholder="Enter your name " rows="1"></textarea> </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">                                                              
+                                        <div class="col-md-8">
+                                            <div class="form-group"> <label for="email">Email </label> <textarea id="form_message" name="email" class="form-control" th:field="*{fdemail}" placeholder="Enter your Email-Id" rows="1" input type="email" ></textarea> </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="form-group"> <label for="form_message">Subject</label> <textarea id="subject" name="subject" class="form-control" th:field="*{fdsubject}" placeholder="Write Subject here." rows="2"></textarea> </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group"> <label for="form_message">Message </label> <textarea id="form_message" name="message" class="form-control" th:field="*{fdmessage}" placeholder="Write your message here" rows="4"></textarea> </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" >
+                                        <div align="right" >
+                                            <button class="btn btn-primary ">Send Feedback
+                                                <i class='bx bxs-send'></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div> <!-- /.8 -->
+            </div> <!-- /.row-->
+        </div>
+    </div>
+    
+    <footer class="page-footer font-small ">
+
+        <!-- Copyright -->            
+        
+        <div class="footer-copyright text-center py-3 blue">© 2021 Copyright:
+            <a href="#">HelpingHands.com</a>            
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+    <!-- Footer -->
+
+</body>
