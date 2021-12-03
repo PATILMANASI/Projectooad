@@ -18,7 +18,7 @@ import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.ColumnDefault;
 
 @Entity
-@Table(name="Project_NGOs_new",uniqueConstraints = @UniqueConstraint(columnNames = "ngoemail"))
+@Table(name="NGOs_3rdDec",uniqueConstraints = @UniqueConstraint(columnNames = "ngoemail"))
 public class NGO {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,11 +41,11 @@ public class NGO {
 	
 	 @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	    @JoinTable(
-	        name = "NGO_roles_new",
+	        name = "NGO_roles_3rdDec",
 	        joinColumns = @JoinColumn(
-	            name = "ngo_id", referencedColumnName = "id"),
+	            name = "ngo_id", referencedColumnName = "id",nullable = true),
 	        inverseJoinColumns = @JoinColumn(
-	            name = "role_id", referencedColumnName = "id"))
+	            name = "role_id", referencedColumnName = "id",nullable = true))
 	
 	 private Collection < NGORole > ngoroles;
 	

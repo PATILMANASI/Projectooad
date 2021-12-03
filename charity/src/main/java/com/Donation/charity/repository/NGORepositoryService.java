@@ -14,5 +14,7 @@ public interface NGORepositoryService extends JpaRepository<NGO, Integer> {
 	List<NGO> findByNgoregstatus(String name);
 	NGO findByNgoemail(String username);
 	
+	
+	
 
 }

@@ -17,7 +17,7 @@ import com.Donation.charity.service.NGOService;
 
 @Configuration
 @EnableWebSecurity
-@Order(2)
+@Order(1)
 public class NGOSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -30,7 +30,7 @@ public class NGOSecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .authorizeRequests()
             .antMatchers("/","/donorsignin**","/admin**","/donornewlogin","/ngosignin","/DAlogin","/dasignin","/donorsignin","/markDAVerified/{id}","/markNGOVerified/{id}",
-                "/registration**","redirect:/verifyNGO","redirect:/verifyDA","/",
+                "/registration**","redirect:/verifyNGO","redirect:/verifyDA","/","/viewDonation","/AdminHome","/verifyNGO",
                 "/js/**",
                 "/css/**",
                 "/images/**").permitAll()
@@ -39,7 +39,7 @@ public class NGOSecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
             .formLogin()
             .loginPage("/ngologin")
-            .defaultSuccessUrl("/verifyNGO",true)
+            .defaultSuccessUrl("/DAhome",true)
             .permitAll()
             .and()
             .logout()

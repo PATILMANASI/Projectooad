@@ -23,9 +23,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class Donation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private int id;
 	
 	private int donor_id;
+	private int ngo_id;
 	
 	private String description;
 	/**
@@ -92,13 +93,19 @@ public class Donation {
 		this.description = description;
 	}
 
-	public Long getId() {
+
+
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+
+
+	public void setId(int id) {
 		this.id = id;
 	}
+
+
 
 	public DonationCategory getDonationcategory() {
 		return donationcategory;
@@ -138,6 +145,24 @@ public class Donation {
 
 	public void setCity(String city) {
 		this.city = city;
+	}
+
+
+
+	/**
+	 * @return the ngo_id
+	 */
+	public int getNgo_id() {
+		return ngo_id;
+	}
+
+
+
+	/**
+	 * @param ngo_id the ngo_id to set
+	 */
+	public void setNgo_id(int ngo_id) {
+		this.ngo_id = ngo_id;
 	}
 
 	

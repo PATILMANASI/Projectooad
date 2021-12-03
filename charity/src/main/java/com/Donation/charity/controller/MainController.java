@@ -64,7 +64,21 @@ public class MainController {
 	public String showFeedbackPage() {
 		return "feedback";
 	}
+	
+	@GetMapping("/DAhome")
+	public String showDAhomepage()
+	{
+		return "da_home";
+	}
+	@GetMapping("/DisplayMessage")
+	public String displayMessage() {
+		return "DisplayMessage";
+	}
 
+	@GetMapping("/AdminHome")
+	public String showAdminHomePage(){
+		return "admin_home";
+	}
 	
 
 }

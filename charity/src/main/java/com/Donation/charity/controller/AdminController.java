@@ -41,7 +41,7 @@ public class AdminController {
      if(Objects.nonNull(oauthUser))
      {
   
-     return "redirect:/adminlogin?success";
+     return "redirect:/AdminHome";
     
     
      } else {
