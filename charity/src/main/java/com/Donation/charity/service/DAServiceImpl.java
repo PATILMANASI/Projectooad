@@ -7,23 +7,35 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.Donation.charity.entities.CompleteDonationDetails;
 import com.Donation.charity.entities.DA;
 import com.Donation.charity.entities.DARole;
-
+import com.Donation.charity.entities.Donation;
+import com.Donation.charity.entities.NGO;
+import com.Donation.charity.repository.CompleteDonationDetailsRepository;
 import com.Donation.charity.repository.DARepositoryService;
+import com.Donation.charity.repository.MakeDonationRepositoryService;
 
 
 @Service
 public class DAServiceImpl implements DAService {
 	@Autowired
 	private DARepositoryService darepo;
+	
+	@Autowired
+	private MakeDonationRepositoryService donationrepo;
+	
+	@Autowired
+	private CompleteDonationDetailsRepository repo;
 	
 	@Autowired
 	@Lazy
@@ -34,6 +46,9 @@ public class DAServiceImpl implements DAService {
 		DA da = darepo.findByDaemail(username);
         if (da == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
+        }
+        if((da.getDaregstatus()).equals("NotVerified")) {
+        	throw new UsernameNotFoundException("Not verified.");
         }
         return new org.springframework.security.core.userdetails.User(da.getDaemail(),
             da.getDapassword(),
@@ -74,4 +89,51 @@ public class DAServiceImpl implements DAService {
 			 darepo.save(da);
 			
 		}
-}
+
+		@Override
+		public List<CompleteDonationDetails> getAllOrders() {
+			// TODO Auto-generated method stub
+			String cityname="";
+			
+			org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			if (!(authentication instanceof AnonymousAuthenticationToken)) {
+			   UserDetails userPrincipal = (UserDetails)authentication.getPrincipal(); 
+			   String daemail= userPrincipal.getUsername();
+			
+			DA da  = darepo.findByDaemail(daemail);
+			cityname=da.getDacity();
+			}
+			//CompleteDonationDetails obj=(CompleteDonationDetails) repo.findByCity(cityname);
+			
+			return repo.findByCityAndDonationstatus(cityname, "Booked");
+			
+		}
+
+		@Override
+		public void bookOrder(int id) {
+			// TODO Auto-generated method stub
+			Optional<CompleteDonationDetails> optional = repo.findById(id);
+			CompleteDonationDetails cdetails=null;
+			if (optional.isPresent()) {
+				cdetails = optional.get();
+			}
+			org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			if (!(authentication instanceof AnonymousAuthenticationToken)) {
+			   UserDetails userPrincipal = (UserDetails)authentication.getPrincipal(); 
+			   String daemail= userPrincipal.getUsername();
+			   DA da  = darepo.findByDaemail(daemail);
+			  
+			   cdetails.setDa_name(da.getDaname());
+			   cdetails.setDa_id(da.getId());
+			   cdetails.setDonationstatus("Pickup Accepted");
+			   Optional<Donation> optional1=donationrepo.findById(cdetails.getDonation_id());
+			   Donation d=null;
+			   if (optional1.isPresent()) {
+					d = optional1.get();
+					d.setDa_id(cdetails.getDa_id());
+				}
+			   repo.save(cdetails);
+		}
+		}
+			
+		}

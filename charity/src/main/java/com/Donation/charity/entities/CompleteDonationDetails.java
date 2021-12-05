@@ -34,14 +34,16 @@ public class CompleteDonationDetails {
 	private String donor_address;
 	private String ngo_address;
 	private String city;
+	private String da_name;
+	private int da_id;
 	private String donationstatus="Not Booked";
 	
 	public CompleteDonationDetails() {
 		super();
 	}
 	public CompleteDonationDetails(int donation_id,int donor_id, int ngo_id, String description, DonationCategory donationcategory,
-			String otherCategory, String comment, String donor_name, String ngo_name, String donor_address,
-			String ngo_address,String city) {
+			String otherCategory, String comment, String donor_name, String ngo_name, String donor_address,String city,String da_name,int da_id,
+			String ngo_address) {
 		super();
 		this.donation_id=donation_id;
 		this.donor_id = donor_id;
@@ -55,6 +57,8 @@ public class CompleteDonationDetails {
 		this.donor_address = donor_address;
 		this.ngo_address = ngo_address;
 		this.city=city;
+		this.setDa_id(da_id);
+		this.da_name=da_name;
 	}
 	public int getDonor_id() {
 		return donor_id;
@@ -152,6 +156,30 @@ public class CompleteDonationDetails {
 	 */
 	public void setDonationstatus(String donation_status) {
 		this.donationstatus = donation_status;
+	}
+	/**
+	 * @return the da_name
+	 */
+	public String getDa_name() {
+		return da_name;
+	}
+	/**
+	 * @param da_name the da_name to set
+	 */
+	public void setDa_name(String da_name) {
+		this.da_name = da_name;
+	}
+	/**
+	 * @return the da_id
+	 */
+	public int getDa_id() {
+		return da_id;
+	}
+	/**
+	 * @param da_id the da_id to set
+	 */
+	public void setDa_id(int da_id) {
+		this.da_id = da_id;
 	}
 	
 	

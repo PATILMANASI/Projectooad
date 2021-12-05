@@ -27,6 +27,7 @@ public class Donation {
 	
 	private int donor_id;
 	private int ngo_id;
+	private int da_id;
 	
 	private String description;
 	/**
@@ -163,6 +164,24 @@ public class Donation {
 	 */
 	public void setNgo_id(int ngo_id) {
 		this.ngo_id = ngo_id;
+	}
+
+
+
+	/**
+	 * @return the da_id
+	 */
+	public int getDa_id() {
+		return da_id;
+	}
+
+
+
+	/**
+	 * @param da_id the da_id to set
+	 */
+	public void setDa_id(int da_id) {
+		this.da_id = da_id;
 	}
 
 	

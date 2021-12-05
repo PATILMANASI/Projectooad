@@ -30,8 +30,8 @@ public class NGOSecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .authorizeRequests()
             .antMatchers("/","/donorsignin**","/admin**","/donornewlogin","/ngosignin","/DAlogin","/dasignin","/donorsignin","/markDAVerified/{id}","/markNGOVerified/{id}",
-                "/registration**","redirect:/verifyNGO","redirect:/verifyDA","/","/viewDonation","/AdminHome","/verifyNGO",
-                "/js/**",
+                "/registration**","redirect:/verifyNGO","redirect:/verifyDA","/","/viewDonation","/AdminHome","/verifyNGO","/DAhome","/viewOrders",
+                "/js/**","/DisplayNoOrders","/verifyDA","/DisplayNoDAs",
                 "/css/**",
                 "/images/**").permitAll()
 //                "/webjars/**").permitAll()

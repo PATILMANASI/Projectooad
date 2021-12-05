@@ -39,8 +39,8 @@
                             <a class="nav-link">Welcome Back</a>
                         </li>
                     </ul>
-                    <a href="#">
-                        <button class="btn btn-primary ms-lg-3">Logout</button>
+                    <a th:href="@{/logout}">
+                        <button sec:authorize="isAuthenticated()" class="btn btn-primary ms-lg-3">Logout</button>
                     </a>
     
                 </div>
@@ -56,7 +56,7 @@
                     <h1 class="display-4 text-white">You Can Bring Change</h1>
                     <p class="text-white-50 my-3">Happiness doesn’t result from what we get, but from what we give.</p>
                     <div class="center">
-                        <a th:href="@{/viewDonation}">
+                        <a th:href="@{/viewOrders}">
                             <button class="btn btn-primary ">Volunteer Now
                                 <i class='bx bx-cycling'></i>
                             </button>
@@ -80,7 +80,7 @@
                         </div>
                         <h5 class="mt-4 mb-2">Volunteer Now</h5>
                         <p>Click Here To Volunteer</p>
-                        <a href="#">
+                        <a th:href="@{/viewOrders}">
                             <div class="center">
                                 <button class="btn btn-primary ">Volunteer NOW
                                     <i class='bx bx-cycling'></i>

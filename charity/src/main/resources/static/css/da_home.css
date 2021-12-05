@@ -40,7 +40,7 @@ a {
 }
 
 .hero {
-  background-image: url(cover.png);
+  background-image: url(../images/cover.png);
   background-position: center;
   background-size: cover;
   background-attachment: fixed;

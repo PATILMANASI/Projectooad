@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -41,11 +42,15 @@ public class NGOServiceImpl implements NGOService {
     private BCryptPasswordEncoder passwordEncoder;
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String username)  {
 		NGO ngo = ngorepo.findByNgoemail(username);
-        if (ngo == null) {
+       if (ngo == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
+        if((ngo.getNgoregstatus()).equals("NotVerified")) {
+        	throw new UsernameNotFoundException("Not verified.");
+        }
+        else 
         return new org.springframework.security.core.userdetails.User(ngo.getNgoemail(),
             ngo.getNgopassword(),
             mapRolesToAuthorities(ngo.getNgoroles()));
@@ -134,3 +139,12 @@ public class NGOServiceImpl implements NGOService {
 	}
 	}
 }
+class CustomException extends Exception {
+	   String message;
+	   CustomException(String str) {
+	      message = str;
+	   }
+	   public String toString() {
+	      return ("Custom Exception Occurred : " + message);
+	   }
+	}

@@ -7,35 +7,30 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.Donation.charity.entities.CompleteDonationDetails;
-import com.Donation.charity.entities.DA;
 import com.Donation.charity.service.DAService;
-
 @Controller
-public class VerifyDAController {
+public class DAAcceptOrderController {
 	
 	@Autowired
 	private DAService daservice;
 	
-
-	
-	@GetMapping("/verifyDA")
-	public String listDAs(Model model) {
-		model.addAttribute("listDAs",daservice.getAllDAs());
-		List<DA> obj=daservice.getAllDAs();
+	@RequestMapping("/viewOrders")
+	public String listOrders(Model model) {
+		model.addAttribute("listOrders",daservice.getAllOrders());
+		List<CompleteDonationDetails> obj=daservice.getAllOrders();
 		if (obj.isEmpty()) {
-			return "redirect:/DisplayNoDAs?success";
+			return "redirect:/DisplayNoOrders?success";
 		}
-		return "Verify_DA";
+		return "DAAcceptOrder";
 	}
-	
-	@GetMapping("/markDAVerified/{id}")
-	public String markDAVerified(@PathVariable (value="id") int id) {
-		this.daservice.MarkVerified(id);
-		return "redirect:/verifyDA";
+	@GetMapping("/bookOrder/{id}")
+	public String markNGOVerified(@PathVariable (value="id") int id) {
+		this.daservice.bookOrder(id);
+		return "redirect:/viewOrders";
 
 }
-	
 
 }

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>NGO Verification</title>
+<title>DA Verification</title>
 
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -13,7 +13,7 @@
 <body>
 
 	<div class="container my-2">
-	<h1>NGO List</h1>
+	<h1>DA List</h1>
 
 	
 		<table border="1" class = "table table-striped table-responsive-md">
@@ -21,25 +21,25 @@
 				<tr>
 					<th>
 						<!--  <a th:href="@{'/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${reverseSortDir}}">-->
-							NGO Name
+							Delivery Agent Name
 					</th>
 					<th>
 					<!--<a th:href="@{'/page/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${reverseSortDir}}">-->
-							NGO registration Number
+							Delivery Agent Address
 					</th>
 					<th>
 				<!--	<a th:href="@{'/page/' + ${currentPage} + '?sortField=email&sortDir=' + ${reverseSortDir}}">-->
-							NGO Registration date
+							Delivery Agent Adhar Card 
 					</th>
 					<th> Actions </th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="ngos : ${listNGOs}">
-					<td th:text="${ngos.ngoname}"></td>
-					<td th:text="${ngos.ngoregistrationnumber}"></td>
-					<td th:text="${ngos.ngoregdate}"></td>
-					<td> <a class="btn btn-primary" th:href="@{/markNGOVerified/{id}(id=${ngos.id})}">Accept</a>
+				<tr th:each="da : ${listDAs}">
+					<td th:text="${da.daname}"></td>
+					<td th:text="${da.daaddress}"></td>
+					
+					<td> <a class="btn btn-primary" th:href="@{/markDAVerified/{id}(id=${da.id})}">Accept</a>
 					    <a class="btn btn-danger">Reject</a>
 					</td>
 				</tr>

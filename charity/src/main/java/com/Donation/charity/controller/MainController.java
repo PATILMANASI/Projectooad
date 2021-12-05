@@ -74,9 +74,18 @@ public class MainController {
 	public String displayMessage() {
 		return "DisplayMessage";
 	}
+	@GetMapping("/DisplayNoOrders")
+	public String displayNoOrdersAvailable() {
+		return "NoOrdersAvailable";
+	}
+
+	@GetMapping("/DisplayNoDAs")
+	public String displayNoDAsAvailable() {
+		return "NoDAsAvailable";
+	}
 
 	@GetMapping("/AdminHome")
-	public String showAdminHomePage(){
+	public String showAdminHomePage() {
 		return "admin_home";
 	}
 	

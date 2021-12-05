@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link 
+rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+ <!-- success message -->
+                    <div th:if="${param.success}">
+						<div class="alert alert-info">No Orders available from you city!</div>
+			        </div>
+<hr>
+<th:block th:each = "orders : ${listOrders}">
+
+<h4>Order</h4>
+<h6>Donor Name:</h6>
+   <p th:text = "${orders.donor_name}"></p>
+   <h6>Donor Address:</h6>
+   <p th:text="${orders.donor_address}" >description</p>
+   <h6>NGO Name:</h6>
+   <p  th:text="${orders.ngo_name}" >description</p>
+   <h6>NGO Address:</h6>
+    <p  th:text="${orders.ngo_address}" >description</p>
+   <a class="btn btn-primary" th:href="@{/bookOrder/{id}(id=${orders.id})}" >Accept</a>
+   <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+</th:block>
+
+</body>
+</html>

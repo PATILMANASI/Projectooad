@@ -28,7 +28,7 @@ public class DASecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .authorizeRequests()
             .antMatchers("/","/donorsignin**","/admin**","/donornewlogin","/dasignin","/ngologin","/ngosignin","/donorsignin","/markNGOVerified/{id}","/markDAVerified/{id}",
-                "/registration**","redirect:/verifyDA","redirect:/verifyNGO","/","/viewDonation","/DAhome","/AdminHome","/verifyNGO",
+                "/registration**","redirect:/verifyDA","redirect:/verifyNGO","/","/viewDonation","/DAhome","/AdminHome","/verifyNGO","/verifyDA","/DisplayNoDAs",
                 "/js/**",
                 "/css/**",
                 "/images/**").permitAll()
@@ -37,7 +37,7 @@ public class DASecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
             .formLogin()
             .loginPage("/DAlogin")
-            .defaultSuccessUrl("/donorhome",true)
+            .defaultSuccessUrl("/DAhome",true)
             .permitAll()
             .and()
             .logout()
