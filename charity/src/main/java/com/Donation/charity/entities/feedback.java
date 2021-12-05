@@ -1,7 +1,5 @@
 package com.Donation.charity.entities;
 
-import java.util.Collection;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,7 +10,7 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name="ProjectFeedbackNew",uniqueConstraints = @UniqueConstraint(columnNames = "fdemail"))
-public class feedback {
+public class Feedback {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +23,7 @@ public class feedback {
 	
 	
 	
-	public feedback(String fdname, String fdemail, String fdsubject, String fdmessage) {
+	public Feedback(String fdname, String fdemail, String fdsubject, String fdmessage) {
 		super();
 		this.fdname = fdname;
 		this.fdemail = fdemail;
@@ -67,7 +65,7 @@ public class feedback {
 	}
 
 
-	public feedback() {
+	public Feedback() {
 		super();
 	}
 	
