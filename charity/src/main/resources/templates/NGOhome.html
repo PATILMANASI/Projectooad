@@ -10,10 +10,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="/css/donor_home_style.css">
+    <link rel="stylesheet" href="/css/NGOhome.css">
 
 
-    <title>Welcome Donor</title>
+    <title>Welcome NGO</title>
 </head>
 
 <body>
@@ -21,7 +21,7 @@
         <nav class="navbar navbar-expand-lg py-3 sticky-top navbar-light bg-white">
             <div class="container">
                 <a class="navbar-brand" href="#">
-                    <img class="logo" src="../images/logo.png" width="45" alt="">
+                    <img class="logo" src="/images/logo.png" width="45" alt="">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,8 +39,8 @@
                             <a class="nav-link">Welcome Back</a>
                         </li>
                     </ul>
-                    <a th:href="@{/logout}">>
-                        <button sec:authorize="isAuthenticated()" class="btn btn-primary ms-lg-3">Logout</button>
+                    <a href="#">
+                        <button class="btn btn-primary ms-lg-3">Logout</button>
                     </a>
     
                 </div>
@@ -53,12 +53,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-7 mx-auto text-center">
-                    <h1 class="display-4 text-white">You Can Bring Change</h1>
+                    <h1 class="display-4 text-white">World Is helping</h1>
                     <p class="text-white-50 my-3">Happiness doesn’t result from what we get, but from what we give.</p>
                     <div class="center">
-                        <a th:href="@{/makedonation}">
-                            <button class="btn btn-primary ">DONATE NOW
-                                <i class='bx bxs-donate-heart'></i>
+                        <a href="#">
+                            <button class="btn btn-primary ">Book donation Now
+                                <i class='bx bx-cart'></i>
                             </button>
                         </a>
                         
@@ -76,14 +76,14 @@
                 <div class="col-lg-4 col-sm-2 donation">
                     <div class="users card-effect bounceInUp">
                         <div class="iconbox">
-                            <i class='bx bxs-donate-heart'></i>
+                            <i class='bx bx-cart'></i>
                         </div>
-                        <h5 class="mt-4 mb-2">Make Donation</h5>
-                        <p>Click Here To Donate</p>
-                        <a th:href="@{/makedonation}">
+                        <h5 class="mt-4 mb-2">Book donation Now</h5>
+                        <p>Click Here To Book donation</p>
+                        <a href="#">
                             <div class="center">
-                                <button class="btn btn-primary ">DONATE NOW
-                                    <i class='bx bxs-donate-heart'></i>
+                                <button class="btn btn-primary ">Book donation Now
+                                    <i class='bx bx-cart'></i>
                                 </button>
                             </div>
                         </a>
@@ -104,7 +104,7 @@
         <div class="footer-copyright text-center py-3 blue">© 2021 Copyright:
             <a href="#"> HelpingHands.com</a>
             <ul>
-                <li><a  th:href="@{/feedbackform}">Feedback</a></li>
+                <li><a href="#">Feedback</a></li>
 
             </ul>
             

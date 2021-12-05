@@ -1,8 +1,7 @@
 package com.Donation.charity.service;
 
-import com.Donation.charity.entities.Donor;
-import com.Donation.charity.entities.feedback;
+import com.Donation.charity.entities.Feedback;
 
 public interface feedbackservice {
-	feedback save(feedback feedbackreg);
+	Feedback save(Feedback feedbackreg);
 }
