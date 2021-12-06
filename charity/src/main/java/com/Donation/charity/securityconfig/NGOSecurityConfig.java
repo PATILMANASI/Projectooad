@@ -17,7 +17,7 @@ import com.Donation.charity.service.NGOService;
 
 @Configuration
 @EnableWebSecurity
-@Order(1)
+@Order(3)
 public class NGOSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
