@@ -1,67 +1,109 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
+
 <head>
-<link 
-rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-	crossorigin="anonymous">
-<meta charset="ISO-8859-1">
-<title>Book Donation</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/css/placed_donation.css">
+
+
+    <title>Placed Donations</title>
 </head>
+
 <body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg py-3 sticky-top navbar-light bg-white">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img class="logo" src="/images/logo.png" width="45" alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">about</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">Welcome Back</a>
+                    </li>
+                </ul>
+                <a href="#">
+                    <button class="btn btn-primary ms-lg-3">Logout</button>
+                </a>
+
+            </div>
+        </div>
+    </nav><!-- //NAVBAR -->
+    
+    
+    <!-- HERO -->
+    <div class="hero vh-100 d-flex align-items-center" id="home">
+        <div id="home" class="container-fluid">
+            <div class="row">
+              <div class="col-sm-12">
+                <h2 class="text-center"> Available Donations </h2><br>
+                
+                 <!-- success message -->
+                 <div th:if="${param.success}">
+                    <div class="alert alert-info">No Donations available from you city!</div>
+                </div>
+                    
+                <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>Donation Category</th>
+                        <th>Description</th>
+                        <th>comment</th>
+                        <th>Book Now</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each = "donations : ${listDonations}">
+                            <td th:text = "${donations.donationcategory}"></td>
+                            <td th:text="${donations.description}" ></td>
+                            <td th:text="${donations.comment}" ></td>
+                            <td>
+                                <a class="btn btn-outline-primary" th:href="@{/bookDonation/{id}(id=${donations.id})}" >Book 
+                                    <i class='bx bx-cycling'></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                  </table>
 
 
-<!-- <div class="breadcrumb container" th:each="donations : ${listDonations}" th:attr="data-value=${donations.id}>
-       <li
-        <li Donor id: th:text="${donations.donor_id}"/>
-        <li Donation Category: th:text="${donations.donationcategory}" />
-        <li Description: th:text="${donations.donationcategory}"/>
-    </div>
-<li th:each="todoitem : ${todolist}" th:attr="data-value=${todoitem.id}">
-    <span th:text="${todoitem.text}" th:remove="tag"></span>
-    <a href='#' class='close' aria-hidden='true'>&times;</a>
-</li> -->
+                
+                
+              </div>
+              
+            </div>
+          </div>
+    </div><!-- //HERO -->
 
 
 
-<!--  <h4></h4>
-    <ul>
-  
-      
-            <li th:each="donations : ${listDonations}" th:text="${donations.donationcategory}" ><h4>Donation category</h4>
-      </li>
-      <li th:each="donations : ${listDonations}" th:text="${donations.donor_id}" >
-        <h4>Donor Id</h4>
-      </li>
-            <li th:each="donations : ${listDonations}" th:text="${donations.donor_name}" ><h4>Donation category</h4>
-      </li>
-            </li>
-            <li th:each="donations : ${listDonations}" th:text="${donations.donor_address}" ><h4>Donation category</h4>
-      </li>
-      </li>
-            </li>
-            <li th:each="donations : ${listDonations}" th:text="${donations.comment}" ><h4>Donation category</h4>
-      </li>
-       </li>
-            </li>
-            <li th:each="donations : ${listDonations}" th:text="${donations.description}" ><h4>Donation category</h4>
-      </li>
-      </ul>
+      <footer class="page-footer font-small ">
 
-*/
--->
- <!-- success message -->
-                    <div th:if="${param.success}">
-						<div class="alert alert-info">No Donations available from you city!</div>
-			        </div>
-<hr>
-<th:block th:each = "donations : ${listDonations}">
-   <h3 th:text = "${donations.donationcategory}">Donation Category:</h3>
-   <p th:text="${donations.description}" >description</p>
-   <p  th:text="${donations.comment}" >description</p>
-   <a class="btn btn-primary" th:href="@{/bookDonation/{id}(id=${donations.id})}">Book</a>
-</th:block>
-<hr>
+        <!-- Copyright -->            
+        
+        <div class="footer-copyright text-center py-3 blue">© 2021 Copyright:
+            <a href="#"> HelpingHands.com</a>            
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+    <!-- Footer -->
+
 </body>
-</html>

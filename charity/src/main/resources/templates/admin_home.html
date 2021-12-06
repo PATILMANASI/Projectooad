@@ -63,7 +63,7 @@
     <section id="users">
         <div class="container">
             <div class="row g-4">
-                <div class="col-lg-6 col-sm-4">
+                <div class="col-lg-4 col-sm-6">
                     <div class="users card-effect bounceInUp">
                         <div class="iconbox">
                             <i class='bx bxs-spreadsheet'></i>
@@ -72,14 +72,15 @@
                         <p>Click Here To View Feedbacks</p>
                         <a href="#">
                             <div class="text-left">
-                                <button class="btn btn-primary ms-lg-3">View Feedbacks</button>
+                                <button class="btn btn-primary ms-lg-3">View Feedbacks
+                                <i class='bx bxs-spreadsheet'></i></button>
                             </div>
                         </a>
 
 
                     </div>
                 </div>
-                <div class="col-lg-6 col-sm-4">
+                <div class="col-lg-4 col-sm-6">
                     <div class="users card-effect">
                         <div class="iconbox">
                             <i class='bx bxs-user-check'></i>
@@ -88,7 +89,26 @@
                         <p>Click Here To Verify NGO</p>
                         <a th:href="@{/verifyNGO}">
                             <div class="text-left">
-                                <button class="btn btn-primary ms-lg-3" >Verify NGO</button>
+                                <button class="btn btn-primary ms-lg-3" >Verify NGO
+                                <i class='bx bxs-user-check'></i></button>
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-sm-6">
+                    <div class="users card-effect">
+                        <div class="iconbox">
+                            <i class='bx bx-user-plus'></i>
+                        </div>
+                        <h5 class="mt-4 mb-2">Verify DA</h5>
+                        <p>Click Here To Verify Delivery Agents</p>
+                        <a href="@{/VerifyDA}">
+                            <div class="text-left">
+                                <button class="btn btn-primary ms-lg-3">Verify DA
+                                    <i class='bx bx-user-plus'></i>
+                                </button>
                             </div>
                         </a>
 
