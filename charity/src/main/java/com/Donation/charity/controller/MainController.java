@@ -96,6 +96,10 @@ public class MainController {
 	public String showAboutPage() {
 		return "about";
 	}
+	@GetMapping("/NoNGOAvailable")
+	public String showNoNGOAvailable() {
+		return "NoNGOAvailable";
+	}
 	
 
 }

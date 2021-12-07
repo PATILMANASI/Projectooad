@@ -13,11 +13,11 @@ public interface NGOService extends UserDetailsService{
 
 	NGO saveNGODetails(NGO ngoreg);
 	
-	public List<NGO> getAllNGOs();
+	//public List<NGO> getAllNGOs();
 
 	
 
-	void MarkVerified(int id);
+	//void MarkVerified(int id);
 
 	public List<CompleteDonationDetails> getAllDonations();
 

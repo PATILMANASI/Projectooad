@@ -24,7 +24,8 @@ import com.Donation.charity.entities.Donor;
 import com.Donation.charity.entities.NGO;
 import com.Donation.charity.entities.NGORole;
 import com.Donation.charity.repository.CompleteDonationDetailsRepository;
-import com.Donation.charity.repository.MakeDonationRepositoryService;
+import com.Donation.charity.repository.DonationRepositoryService;
+
 import com.Donation.charity.repository.NGORepositoryService;
 @Service
 public class NGOServiceImpl implements NGOService {
@@ -32,7 +33,7 @@ public class NGOServiceImpl implements NGOService {
 	private NGORepositoryService ngorepo;
 	
 	@Autowired
-	private MakeDonationRepositoryService donationrepo;
+	private DonationRepositoryService donationrepo;
 	
 	@Autowired
 	private CompleteDonationDetailsRepository repo;
@@ -68,7 +69,7 @@ public class NGOServiceImpl implements NGOService {
 		return ngorepo.save(ngo);
 	}
 
-	@Override
+/*	@Override
 	public List<NGO> getAllNGOs() {
 		String name="NotVerified";
 		return ngorepo.findByNgoregstatus(name);
@@ -88,7 +89,7 @@ public class NGOServiceImpl implements NGOService {
 		//Donor newdonor=new Donor(donor.getDrname(),donor.getDremail(),passwordEncoder.encode(donor.getDrpassword()),donor.getDrrepass(),donor.getDrcity(),donor.getDrphone(),donor.getDrpincode(),donor.getdraddress(),Arrays.asList(new UserRole("ROLE USER")));
 		 ngorepo.save(ngo);
 		
-	}
+	}*/
 
 	@Override
 	public List<CompleteDonationDetails> getAllDonations() {
@@ -139,13 +140,6 @@ public class NGOServiceImpl implements NGOService {
 		   repo.save(cdetails);
 	}
 	}
+
+	
 }
-class CustomException extends Exception {
-	   String message;
-	   CustomException(String str) {
-	      message = str;
-	   }
-	   public String toString() {
-	      return ("Custom Exception Occurred : " + message);
-	   }
-	}

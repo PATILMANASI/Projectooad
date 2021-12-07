@@ -10,20 +10,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.Donation.charity.entities.CompleteDonationDetails;
 import com.Donation.charity.entities.DA;
-import com.Donation.charity.service.DAService;
+import com.Donation.charity.service.AdminService;
+
 
 @Controller
 public class VerifyDAController {
 	
 	@Autowired
-	private DAService daservice;
+	private AdminService adminservice;
 	
 
 	
 	@GetMapping("/verifyDA")
 	public String listDAs(Model model) {
-		model.addAttribute("listDAs",daservice.getAllDAs());
-		List<DA> obj=daservice.getAllDAs();
+		model.addAttribute("listDAs",adminservice.getAllDAs());
+		List<DA> obj=adminservice.getAllDAs();
 		if (obj.isEmpty()) {
 			return "redirect:/DisplayNoDAs?success";
 		}
@@ -32,7 +33,7 @@ public class VerifyDAController {
 	
 	@GetMapping("/markDAVerified/{id}")
 	public String markDAVerified(@PathVariable (value="id") int id) {
-		this.daservice.MarkVerified(id);
+		this.adminservice.MarkDAVerified(id);
 		return "redirect:/verifyDA";
 
 }

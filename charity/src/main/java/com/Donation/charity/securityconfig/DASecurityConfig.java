@@ -16,7 +16,7 @@ import com.Donation.charity.service.DAService;
 
 @Configuration
 @EnableWebSecurity
-@Order(1)
+@Order(2)
 public class DASecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
     private DAService daservice;
@@ -29,7 +29,7 @@ public class DASecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             .antMatchers("/","/donorsignin**","/admin**","/donornewlogin","/dasignin","/ngologin","/ngosignin","/donorsignin","/markNGOVerified/{id}","/markDAVerified/{id}",
                 "/registration**","redirect:/verifyDA","redirect:/verifyNGO","/","/viewDonation","/DAhome","/AdminHome","/verifyNGO","/verifyDA","/DisplayNoDAs",
-                "/js/**","/About","/NGOHome",
+                "/js/**","/About","/NGOHome","/NoNGOAvailable","/viewFeedback",
                 "/css/**",
                 "/images/**").permitAll()
 //                "/webjars/**").permitAll()

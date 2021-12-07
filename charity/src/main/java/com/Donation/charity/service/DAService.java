@@ -11,10 +11,10 @@ public interface DAService extends UserDetailsService {
 	
 	DA saveDADetails(DA dareg);
 	
-	public List<DA> getAllDAs();
+//	public List<DA> getAllDAs();
 	
 
-	void MarkVerified(int id);
+//	void MarkVerified(int id);
 
 	public List<CompleteDonationDetails> getAllOrders();
 

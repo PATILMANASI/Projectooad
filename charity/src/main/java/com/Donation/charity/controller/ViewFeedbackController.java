@@ -7,32 +7,30 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.Donation.charity.entities.DA;
-import com.Donation.charity.entities.NGO;
+import com.Donation.charity.entities.Feedback;
+import com.Donation.charity.service.AdminService;
 import com.Donation.charity.service.AdminService;
 
 @Controller
-public class VerifyNGOController {
+
+public class ViewFeedbackController {
 	@Autowired
 	private AdminService adminservice;
 	
 
 	
-	@GetMapping("/verifyNGO")
-	public String listNGOs(Model model) {
-		model.addAttribute("listNGOs",adminservice.getAllNGOs());
-		List<NGO> obj=adminservice.getAllNGOs();
+@GetMapping("/viewFeedback")
+	public String listDAs(Model model) {
+		model.addAttribute("listFeedbacks",adminservice.showAllFeedbacks());
+		List<Feedback> obj=adminservice.showAllFeedbacks();
 		if (obj.isEmpty()) {
-			return "redirect:/NoNGOAvailable?success";
+			return "redirect:/viewFeedback?success";
 		}
-		return "verify_ngo";
+		return "DisplayFeedbacks";
 	}
 	
-	@GetMapping("/markNGOVerified/{id}")
-	public String markNGOVerified(@PathVariable (value="id") int id) {
-		this.adminservice.markNGOVerified(id);
-		return "redirect:/verifyNGO";
-
-}
+	
 }

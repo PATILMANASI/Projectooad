@@ -9,23 +9,25 @@ import javax.persistence.UniqueConstraint;
 
 
 @Entity
-@Table(name="ProjectFeedbackNew",uniqueConstraints = @UniqueConstraint(columnNames = "fdemail"))
+@Table(name="ProjectFeedbackNew_",uniqueConstraints = @UniqueConstraint(columnNames = "fdemail"))
 public class Feedback {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	private String fdname;
+	private String name;
 	private String fdemail;
 	private String fdsubject;
 	private String fdmessage;
 	
-	
-	
-	public Feedback(String fdname, String fdemail, String fdsubject, String fdmessage) {
+	public Feedback() {
 		super();
-		this.fdname = fdname;
+	}
+
+	public Feedback(String name, String fdemail, String fdsubject, String fdmessage) {
+		super();
+		this.name = name;
 		this.fdemail = fdemail;
 		this.fdsubject = fdsubject;
 		this.fdmessage = fdmessage;
@@ -39,11 +41,11 @@ public class Feedback {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getFdname() {
-		return fdname;
+	public String getName() {
+		return name;
 	}
-	public void setFdname(String fdname) {
-		this.fdname = fdname;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getFdemail() {
 		return fdemail;
@@ -65,9 +67,7 @@ public class Feedback {
 	}
 
 
-	public Feedback() {
-		super();
-	}
+	
 	
 
 	

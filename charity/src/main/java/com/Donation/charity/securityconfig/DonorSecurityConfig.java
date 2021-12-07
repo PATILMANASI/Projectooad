@@ -19,7 +19,7 @@ import com.Donation.charity.service.DonorService;
 
 @Configuration
 @EnableWebSecurity
-@Order(2)
+@Order(1)
 public class DonorSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -33,8 +33,8 @@ public class DonorSecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             .antMatchers("/","/donorsignin**","/admin**","/verifyNGO**","/verifyDA**","/DAlogin","/dasignin","/ngologin","/ngosignin","/donorsignin","/markDAVerified/{id}","/markNGOVerified/{id}",
                 "/registration**","redirect:/verifyNGO","/viewDonation","/DAhome","/AdminHome","/verifyNGO","/viewOrders",
-                "/js/**","/DisplayNoOrders","/verifyDA","/DisplayNoDAs","/About","/NGOHome",
-                "/css/**",
+                "/js/**","/DisplayNoOrders","/verifyDA","/DisplayNoDAs","/About","/NGOHome","/feedbackform","/viewFeedback",
+                "/css/**","/NoNGOAvailable",
                 "/images/**").permitAll()
 //                "/webjars/**").permitAll()
             .anyRequest().authenticated()

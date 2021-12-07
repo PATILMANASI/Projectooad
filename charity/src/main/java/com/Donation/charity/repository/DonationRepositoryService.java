@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.Donation.charity.entities.Donation;
 import com.Donation.charity.entities.NGO;
 @Repository
-public interface MakeDonationRepositoryService extends JpaRepository<Donation, Integer> {
+public interface DonationRepositoryService extends JpaRepository<Donation, Integer> {
 
 //	List<Donation> findByCity(String city);
 }

@@ -54,7 +54,7 @@
                 <div class="card mt-8 mx-auto p-8 bg-transparent border-0 ">
                     <div class="card-body bg-transparent">
                         <div class="container">
-                            <form id="Donation-form" role="form" control="" class="form-group" th:action="@{feedbackform}" method="post" th:object="${feedbackobj}">
+                            <form id="Donation-form" role="form">
                                 <div class="controls">
                                     
                                     
@@ -63,9 +63,9 @@
 										<div class="alert alert-info">Thank you! your feedback is important to us.</div>
 							        </div><!-- /success message -->
                                     
-                           
+                                    <form control="" class="form-group" th:action="@{feedbackform}" method="post" th:object="${feedbackobj}">
+                                    </form>
                                     
-                                       
                                     <div class="row">
                                         <div class="col-md-8">
                                             <div class="form-group"> <label for="name">Name</label> <textarea id="name" name="message" class="form-control" th:field="*{name}" placeholder="Enter your name " rows="1"></textarea> </div>
@@ -94,7 +94,6 @@
                                             </button>
                                         </div>
                                     </div>
-                                    
                                 </div>
                             </form>
                         </div>

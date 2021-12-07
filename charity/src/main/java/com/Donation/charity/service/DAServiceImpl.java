@@ -23,7 +23,8 @@ import com.Donation.charity.entities.Donation;
 import com.Donation.charity.entities.NGO;
 import com.Donation.charity.repository.CompleteDonationDetailsRepository;
 import com.Donation.charity.repository.DARepositoryService;
-import com.Donation.charity.repository.MakeDonationRepositoryService;
+import com.Donation.charity.repository.DonationRepositoryService;
+;
 
 
 @Service
@@ -32,7 +33,7 @@ public class DAServiceImpl implements DAService {
 	private DARepositoryService darepo;
 	
 	@Autowired
-	private MakeDonationRepositoryService donationrepo;
+	private DonationRepositoryService donationrepo;
 	
 	@Autowired
 	private CompleteDonationDetailsRepository repo;
@@ -62,10 +63,10 @@ public class DAServiceImpl implements DAService {
 	}
 
 	
-	@Override
+	/*@Override
 	public List<DA> getAllDAs() {
 		String name="NotVerified";
-		return darepo.findByDaregstatus(name);}
+		return darepo.findByDaregstatus(name);}*/
 		
 		@Override
 		public DA saveDADetails(DA dareg) {
@@ -75,7 +76,7 @@ public class DAServiceImpl implements DAService {
 
 		
 
-		@Override
+	/*	@Override
 		public void MarkVerified(int id) {
 			// TODO Auto-generated method stub
 			Optional<DA> optional = darepo.findById( id);
@@ -88,7 +89,7 @@ public class DAServiceImpl implements DAService {
 			//Donor newdonor=new Donor(donor.getDrname(),donor.getDremail(),passwordEncoder.encode(donor.getDrpassword()),donor.getDrrepass(),donor.getDrcity(),donor.getDrphone(),donor.getDrpincode(),donor.getdraddress(),Arrays.asList(new UserRole("ROLE USER")));
 			 darepo.save(da);
 			
-		}
+		}*/
 
 		@Override
 		public List<CompleteDonationDetails> getAllOrders() {

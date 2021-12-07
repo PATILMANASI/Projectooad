@@ -1,5 +1,6 @@
 package com.Donation.charity.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -14,17 +15,18 @@ import com.Donation.charity.entities.Donation;
 import com.Donation.charity.entities.DonationCategory;
 import com.Donation.charity.entities.Donor;
 import com.Donation.charity.service.DonorService;
-import com.Donation.charity.service.MakeDonationService;
+
 @Controller
 @RequestMapping("/makedonation")
 public class MakeDonationController {
 	
-	private MakeDonationService makedonationservice;
+	@Autowired
+	private DonorService donorservice;
 
 	
-    public MakeDonationController(MakeDonationService makedonationservice) {
+    public MakeDonationController(DonorService donorservice) {
 		super();
-		this.makedonationservice = makedonationservice;
+		this.donorservice = donorservice;
 	}
 
 	@ModelAttribute("donate")
@@ -44,7 +46,7 @@ public class MakeDonationController {
 		
 		
 		
-		makedonationservice.save(donation);
+		donorservice.placeDonation(donation);
 		//return "donorlist";
 		//return "redirect:/registration?success";
 		return "redirect:/makedonation?success";
