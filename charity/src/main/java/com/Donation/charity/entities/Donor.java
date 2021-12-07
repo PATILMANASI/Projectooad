@@ -24,7 +24,7 @@ import javax.persistence.UniqueConstraint;
 
 
 @Entity
-@Table(name="ProjectDonorsNew",uniqueConstraints = @UniqueConstraint(columnNames = "dremail"))
+@Table(name="ProjectDonorsNew_",uniqueConstraints = @UniqueConstraint(columnNames = "dremail"))
 public class Donor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,7 +43,7 @@ public class Donor {
 	
 	 @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	    @JoinTable(
-	        name = "donors_roles_new",
+	        name = "donors_roles_new_",
 	        joinColumns = @JoinColumn(
 	            name = "donors_id", referencedColumnName = "id"),
 	        inverseJoinColumns = @JoinColumn(

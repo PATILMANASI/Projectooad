@@ -34,13 +34,10 @@ public class AdminService implements UserDetailsService{
 	}
 
 }*/
-@Service
-public class AdminService {
-@Autowired
-private AdminRepositoryService adrepo;
+
+public interface AdminService {
+
   
-  public Admin login(String adname, String adpassword) {
-  Admin admin = adrepo.findByUsernameAndPassword(adname, adpassword);
-   return admin;
-  }
+  public Admin login(String adname, String adpassword);
+  
 }

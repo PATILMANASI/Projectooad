@@ -31,7 +31,7 @@ public class NGOSecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             .antMatchers("/","/donorsignin**","/admin**","/donornewlogin","/ngosignin","/DAlogin","/dasignin","/donorsignin","/markDAVerified/{id}","/markNGOVerified/{id}",
                 "/registration**","redirect:/verifyNGO","redirect:/verifyDA","/","/viewDonation","/AdminHome","/verifyNGO","/DAhome","/viewOrders",
-                "/js/**","/DisplayNoOrders","/verifyDA","/DisplayNoDAs",
+                "/js/**","/DisplayNoOrders","/verifyDA","/DisplayNoDAs","/About",
                 "/css/**",
                 "/images/**").permitAll()
 //                "/webjars/**").permitAll()
@@ -39,7 +39,7 @@ public class NGOSecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
             .formLogin()
             .loginPage("/ngologin")
-            .defaultSuccessUrl("/DAhome",true)
+            .defaultSuccessUrl("/NGOHome",true)
             .permitAll()
             .and()
             .logout()

@@ -127,6 +127,7 @@ public class NGOServiceImpl implements NGOService {
 		  
 		   cdetails.setNgo_name(ngo.getNgoname());
 		   cdetails.setNgo_id(ngo.getId());
+		   cdetails.setNgo_phoneno(ngo.getNgophone());
 		   cdetails.setNgo_address(ngo.getNgoaddress());
 		   cdetails.setDonationstatus("Booked");
 		   Optional<Donation> optional1=donationrepo.findById(cdetails.getDonation_id());

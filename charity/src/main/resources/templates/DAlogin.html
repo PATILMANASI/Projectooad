@@ -55,10 +55,10 @@
 					
 					<div class="row">
 						<form control="" class="form-group" th:action="@{/DAlogin}" method="post">
-						<!-- error message -->
-    					<div th:if="${param.error}">
+							</div>
+    						<div th:if="${param.error}">
     					
-    				      <div class="alert alert-danger">Invalid username or password.</div>
+    				      <div class="alert alert-danger">NGO details not verified by Admin.</div>
     					</div>
 							<div class="row">
 								<input type="text" name="username" id="username" class="form__input" placeholder="Username">

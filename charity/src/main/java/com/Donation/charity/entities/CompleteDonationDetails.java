@@ -33,9 +33,11 @@ public class CompleteDonationDetails {
 	private String ngo_name;
 	private String donor_address;
 	private String ngo_address;
+	private String donor_phoneno;
+	private String ngo_phoneno;
 	private String city;
 	private String da_name;
-	private int da_id;
+	private int daid;
 	private String donationstatus="Not Booked";
 	
 	public CompleteDonationDetails() {
@@ -43,7 +45,7 @@ public class CompleteDonationDetails {
 	}
 	public CompleteDonationDetails(int donation_id,int donor_id, int ngo_id, String description, DonationCategory donationcategory,
 			String otherCategory, String comment, String donor_name, String ngo_name, String donor_address,String city,String da_name,int da_id,
-			String ngo_address) {
+			String ngo_address,String donor_phoneno,String ngo_phoneno) {
 		super();
 		this.donation_id=donation_id;
 		this.donor_id = donor_id;
@@ -57,8 +59,10 @@ public class CompleteDonationDetails {
 		this.donor_address = donor_address;
 		this.ngo_address = ngo_address;
 		this.city=city;
-		this.setDa_id(da_id);
+		this.daid=da_id;
 		this.da_name=da_name;
+		this.setDonor_phoneno(donor_phoneno);
+		this.setNgo_phoneno(ngo_phoneno);
 	}
 	public int getDonor_id() {
 		return donor_id;
@@ -172,14 +176,42 @@ public class CompleteDonationDetails {
 	/**
 	 * @return the da_id
 	 */
-	public int getDa_id() {
-		return da_id;
+	
+	/**
+	 * @return the daid
+	 */
+	public int getDaid() {
+		return daid;
 	}
 	/**
-	 * @param da_id the da_id to set
+	 * @param daid the daid to set
 	 */
-	public void setDa_id(int da_id) {
-		this.da_id = da_id;
+	public void setDaid(int daid) {
+		this.daid = daid;
+	}
+	/**
+	 * @return the donor_phoneno
+	 */
+	public String getDonor_phoneno() {
+		return donor_phoneno;
+	}
+	/**
+	 * @param donor_phoneno the donor_phoneno to set
+	 */
+	public void setDonor_phoneno(String donor_phoneno) {
+		this.donor_phoneno = donor_phoneno;
+	}
+	/**
+	 * @return the ngo_phoneno
+	 */
+	public String getNgo_phoneno() {
+		return ngo_phoneno;
+	}
+	/**
+	 * @param ngo_phoneno the ngo_phoneno to set
+	 */
+	public void setNgo_phoneno(String ngo_phoneno) {
+		this.ngo_phoneno = ngo_phoneno;
 	}
 	
 	

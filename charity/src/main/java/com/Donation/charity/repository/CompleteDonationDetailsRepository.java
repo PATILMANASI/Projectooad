@@ -12,4 +12,11 @@ public interface CompleteDonationDetailsRepository extends JpaRepository<Complet
 	//List<CompleteDonationDetails> findByCity(String city);
 
 	List<CompleteDonationDetails> findByCityAndDonationstatus(String cityname,String string);
+
+	List<CompleteDonationDetails> findByDaidAndDonationstatus(int da_id, String string);
+
+	List<CompleteDonationDetails> findByDaidAndDonationstatusAndDonationstatus(int da_id, String string,
+			String string2);
+
+	List<CompleteDonationDetails> findByDaidAndDonationstatusOrDonationstatus(int da_id, String string, String string2);
 }

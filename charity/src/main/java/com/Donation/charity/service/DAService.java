@@ -20,4 +20,10 @@ public interface DAService extends UserDetailsService {
 
 	void bookOrder(int id);
 
+	public List<CompleteDonationDetails> getAllAcceptedOrders();
+
+	void updateOrderStatusPickedUp(int id);
+
+	void updateOrderStatusDelivered(int id);
+
 }

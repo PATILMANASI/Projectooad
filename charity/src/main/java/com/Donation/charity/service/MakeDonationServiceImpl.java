@@ -48,7 +48,7 @@ public class MakeDonationServiceImpl implements MakeDonationService{
 		
 	    makedonationrepo.save(donate);
 		
-	    CompleteDonationDetails details=new CompleteDonationDetails(donate.getId(),donor.getId(), 0,  donation.getDescription(), donation.getDonationcategory(),donation.getOthercategory(),donation.getComment(), donor.getDrname(), "", donor.getdraddress(),donor.getDrcity(),"",0,"");
+	    CompleteDonationDetails details=new CompleteDonationDetails(donate.getId(),donor.getId(), 0,  donation.getDescription(), donation.getDonationcategory(),donation.getOthercategory(),donation.getComment(), donor.getDrname(), "", donor.getdraddress(),donor.getDrcity(),"",0,"",donor.getDrphone(),"");
 		completerepo.save(details) ;
 		}
 	}

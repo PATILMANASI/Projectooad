@@ -83,10 +83,18 @@ public class MainController {
 	public String displayNoDAsAvailable() {
 		return "NoDAsAvailable";
 	}
+	@GetMapping("/NGOHome")
+	public String showNGOHomePage() {
+		return "NGOhome";
+	}
 
 	@GetMapping("/AdminHome")
 	public String showAdminHomePage() {
 		return "admin_home";
+	}
+	@GetMapping("/About")
+	public String showAboutPage() {
+		return "about";
 	}
 	
 

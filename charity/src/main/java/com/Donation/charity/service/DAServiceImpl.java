@@ -124,16 +124,81 @@ public class DAServiceImpl implements DAService {
 			   DA da  = darepo.findByDaemail(daemail);
 			  
 			   cdetails.setDa_name(da.getDaname());
-			   cdetails.setDa_id(da.getId());
-			   cdetails.setDonationstatus("Pickup Accepted");
+			   cdetails.setDaid(da.getId());
+			   cdetails.setDonationstatus("Order Accepted");
 			   Optional<Donation> optional1=donationrepo.findById(cdetails.getDonation_id());
 			   Donation d=null;
 			   if (optional1.isPresent()) {
 					d = optional1.get();
-					d.setDa_id(cdetails.getDa_id());
+					d.setDa_id(cdetails.getDaid());
 				}
 			   repo.save(cdetails);
 		}
 		}
+
+		@Override
+		public List<CompleteDonationDetails> getAllAcceptedOrders() {
+			// TODO Auto-generated method stub
+			int da_id=0;
+			
+			org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			if (!(authentication instanceof AnonymousAuthenticationToken)) {
+			   UserDetails userPrincipal = (UserDetails)authentication.getPrincipal(); 
+			   String daemail= userPrincipal.getUsername();
+			
+			DA da  = darepo.findByDaemail(daemail);
+			da_id=da.getId();
+			
+			}
+			//CompleteDonationDetails obj=(CompleteDonationDetails) repo.findByCity(cityname);
+			// CompleteDonationDetailsRepository temp=repo.findByDaid(da_id);
+			return repo.findByDaidAndDonationstatusOrDonationstatus(da_id, "Order Accepted","Picked up");
+		}
+
+		@Override
+		public void updateOrderStatusPickedUp(int id) {
+			// TODO Auto-generated method stub// TODO Auto-generated method stub
+			Optional<CompleteDonationDetails> optional = repo.findById(id);
+			CompleteDonationDetails cdetails=null;
+			if (optional.isPresent()) {
+				cdetails = optional.get();
+			}
+			org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			if (!(authentication instanceof AnonymousAuthenticationToken)) {
+			   UserDetails userPrincipal = (UserDetails)authentication.getPrincipal(); 
+			   String daemail= userPrincipal.getUsername();
+			   DA da  = darepo.findByDaemail(daemail);
+			  
+			  
+			   cdetails.setDonationstatus("Picked up");
+			  
+		}
+			   repo.save(cdetails);
+		}
+
+		@Override
+		public void updateOrderStatusDelivered(int id) {
+			// TODO Auto-generated method stub
+			// TODO Auto-generated method stub// TODO Auto-generated method stub
+			Optional<CompleteDonationDetails> optional = repo.findById(id);
+			CompleteDonationDetails cdetails=null;
+			if (optional.isPresent()) {
+				cdetails = optional.get();
+			}
+			org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			if (!(authentication instanceof AnonymousAuthenticationToken)) {
+			   UserDetails userPrincipal = (UserDetails)authentication.getPrincipal(); 
+			   String daemail= userPrincipal.getUsername();
+			   DA da  = darepo.findByDaemail(daemail);
+			  
+			  
+			   cdetails.setDonationstatus("Delivered");
+			  
+		}
+			   repo.save(cdetails);
 			
 		}
+			
+		}
+			
+		
