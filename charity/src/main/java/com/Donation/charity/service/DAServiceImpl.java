@@ -20,7 +20,9 @@ import com.Donation.charity.entities.CompleteDonationDetails;
 import com.Donation.charity.entities.DA;
 import com.Donation.charity.entities.DARole;
 import com.Donation.charity.entities.Donation;
+import com.Donation.charity.entities.DonationStatus;
 import com.Donation.charity.entities.NGO;
+import com.Donation.charity.entities.RegistrationStatus;
 import com.Donation.charity.repository.CompleteDonationDetailsRepository;
 import com.Donation.charity.repository.DARepositoryService;
 import com.Donation.charity.repository.DonationRepositoryService;
@@ -38,6 +40,10 @@ public class DAServiceImpl implements DAService {
 	@Autowired
 	private CompleteDonationDetailsRepository repo;
 	
+	@Autowired 
+	private DonorService donorservice;
+	
+	
 	@Autowired
 	@Lazy
     private BCryptPasswordEncoder passwordEncoder;
@@ -48,7 +54,7 @@ public class DAServiceImpl implements DAService {
         if (da == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
-        if((da.getDaregstatus()).equals("NotVerified")) {
+        if((da.getRegistrationstatus()).equals(RegistrationStatus.Not_Verified) ){
         	throw new UsernameNotFoundException("Not verified.");
         }
         return new org.springframework.security.core.userdetails.User(da.getDaemail(),
@@ -63,50 +69,31 @@ public class DAServiceImpl implements DAService {
 	}
 
 	
-	/*@Override
-	public List<DA> getAllDAs() {
-		String name="NotVerified";
-		return darepo.findByDaregstatus(name);}*/
+
 		
 		@Override
 		public DA saveDADetails(DA dareg) {
-			DA da=new DA(dareg.getDaregstatus(),dareg.getDaname(),dareg.getDaregistrationnumber(),dareg.getDaregdate(),dareg.getDaemail(),passwordEncoder.encode(dareg.getDapassword()),dareg.getDarepassword(),dareg.getDaphone(),dareg.getDacity(),dareg.getDapincode(),dareg.getDaaddress(),Arrays.asList(new DARole("USER")));
+			DA da=new DA(dareg.getRegistrationstatus(),dareg.getDaname(),dareg.getDaemail(),passwordEncoder.encode(dareg.getDapassword()),dareg.getDarepassword(),dareg.getDaphone(),dareg.getDacity(),dareg.getDapincode(),dareg.getDaaddress(),Arrays.asList(new DARole("USER")));
 			return darepo.save(da);
 		}
 
 		
 
-	/*	@Override
-		public void MarkVerified(int id) {
-			// TODO Auto-generated method stub
-			Optional<DA> optional = darepo.findById( id);
-			DA da=null;
-			if (optional.isPresent()) {
-				da = optional.get();
-			}
-			da.setDaregstatus("Verified");
-			
-			//Donor newdonor=new Donor(donor.getDrname(),donor.getDremail(),passwordEncoder.encode(donor.getDrpassword()),donor.getDrrepass(),donor.getDrcity(),donor.getDrphone(),donor.getDrpincode(),donor.getdraddress(),Arrays.asList(new UserRole("ROLE USER")));
-			 darepo.save(da);
-			
-		}*/
-
+	
 		@Override
 		public List<CompleteDonationDetails> getAllOrders() {
 			// TODO Auto-generated method stub
 			String cityname="";
-			
-			org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-			if (!(authentication instanceof AnonymousAuthenticationToken)) {
-			   UserDetails userPrincipal = (UserDetails)authentication.getPrincipal(); 
-			   String daemail= userPrincipal.getUsername();
+			UserDetails obj = donorservice.getLoggedInUser();
+		
+			   String daemail= obj.getUsername();
 			
 			DA da  = darepo.findByDaemail(daemail);
 			cityname=da.getDacity();
-			}
-			//CompleteDonationDetails obj=(CompleteDonationDetails) repo.findByCity(cityname);
 			
-			return repo.findByCityAndDonationstatus(cityname, "Booked");
+		
+			
+			return repo.findByCityAndDonationstatus(cityname, com.Donation.charity.entities.DonationStatus.Booked);
 			
 		}
 
@@ -118,15 +105,13 @@ public class DAServiceImpl implements DAService {
 			if (optional.isPresent()) {
 				cdetails = optional.get();
 			}
-			org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-			if (!(authentication instanceof AnonymousAuthenticationToken)) {
-			   UserDetails userPrincipal = (UserDetails)authentication.getPrincipal(); 
-			   String daemail= userPrincipal.getUsername();
+			UserDetails obj = donorservice.getLoggedInUser();
+			   String daemail= obj.getUsername();
 			   DA da  = darepo.findByDaemail(daemail);
 			  
 			   cdetails.setDa_name(da.getDaname());
 			   cdetails.setDaid(da.getId());
-			   cdetails.setDonationstatus("Order Accepted");
+			   cdetails.setDonationstatus(com.Donation.charity.entities.DonationStatus.Order_Accepted);
 			   Optional<Donation> optional1=donationrepo.findById(cdetails.getDonation_id());
 			   Donation d=null;
 			   if (optional1.isPresent()) {
@@ -135,7 +120,7 @@ public class DAServiceImpl implements DAService {
 				}
 			   repo.save(cdetails);
 		}
-		}
+		
 
 		@Override
 		public List<CompleteDonationDetails> getAllAcceptedOrders() {
@@ -151,9 +136,7 @@ public class DAServiceImpl implements DAService {
 			da_id=da.getId();
 			
 			}
-			//CompleteDonationDetails obj=(CompleteDonationDetails) repo.findByCity(cityname);
-			// CompleteDonationDetailsRepository temp=repo.findByDaid(da_id);
-			return repo.findByDaidAndDonationstatusOrDonationstatus(da_id, "Order Accepted","Picked up");
+			return repo.findByDaidAndDonationstatusOrDonationstatus(da_id, DonationStatus.Order_Accepted,DonationStatus.Picked_up);
 		}
 
 		@Override
@@ -164,16 +147,14 @@ public class DAServiceImpl implements DAService {
 			if (optional.isPresent()) {
 				cdetails = optional.get();
 			}
-			org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-			if (!(authentication instanceof AnonymousAuthenticationToken)) {
-			   UserDetails userPrincipal = (UserDetails)authentication.getPrincipal(); 
-			   String daemail= userPrincipal.getUsername();
+			UserDetails obj = donorservice.getLoggedInUser(); 
+			   String daemail= obj.getUsername();
 			   DA da  = darepo.findByDaemail(daemail);
 			  
 			  
-			   cdetails.setDonationstatus("Picked up");
+			   cdetails.setDonationstatus(DonationStatus.Picked_up);
 			  
-		}
+		
 			   repo.save(cdetails);
 		}
 
@@ -186,16 +167,14 @@ public class DAServiceImpl implements DAService {
 			if (optional.isPresent()) {
 				cdetails = optional.get();
 			}
-			org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-			if (!(authentication instanceof AnonymousAuthenticationToken)) {
-			   UserDetails userPrincipal = (UserDetails)authentication.getPrincipal(); 
-			   String daemail= userPrincipal.getUsername();
+			UserDetails obj = donorservice.getLoggedInUser();
+			   String daemail= obj.getUsername();
 			   DA da  = darepo.findByDaemail(daemail);
 			  
 			  
-			   cdetails.setDonationstatus("Delivered");
+			   cdetails.setDonationstatus(DonationStatus.Delivered);
 			  
-		}
+		
 			   repo.save(cdetails);
 			
 		}

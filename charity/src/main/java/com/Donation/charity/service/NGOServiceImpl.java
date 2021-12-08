@@ -20,9 +20,11 @@ import org.springframework.stereotype.Service;
 
 import com.Donation.charity.entities.CompleteDonationDetails;
 import com.Donation.charity.entities.Donation;
+import com.Donation.charity.entities.DonationStatus;
 import com.Donation.charity.entities.Donor;
 import com.Donation.charity.entities.NGO;
 import com.Donation.charity.entities.NGORole;
+import com.Donation.charity.entities.RegistrationStatus;
 import com.Donation.charity.repository.CompleteDonationDetailsRepository;
 import com.Donation.charity.repository.DonationRepositoryService;
 
@@ -34,6 +36,9 @@ public class NGOServiceImpl implements NGOService {
 	
 	@Autowired
 	private DonationRepositoryService donationrepo;
+	
+	@Autowired 
+	private DonorService donorservice;
 	
 	@Autowired
 	private CompleteDonationDetailsRepository repo;
@@ -48,7 +53,7 @@ public class NGOServiceImpl implements NGOService {
        if (ngo == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
-        if((ngo.getNgoregstatus()).equals("NotVerified")) {
+        if((ngo.getRegistrationstatus()).equals(RegistrationStatus.Not_Verified)) {
         	throw new UsernameNotFoundException("Not verified.");
         }
         else 
@@ -69,45 +74,20 @@ public class NGOServiceImpl implements NGOService {
 		return ngorepo.save(ngo);
 	}
 
-/*	@Override
-	public List<NGO> getAllNGOs() {
-		String name="NotVerified";
-		return ngorepo.findByNgoregstatus(name);
-		
-	}
 
-	@Override
-	public void MarkVerified(int id) {
-		// TODO Auto-generated method stub
-		Optional<NGO> optional = ngorepo.findById( id);
-		NGO ngo=null;
-		if (optional.isPresent()) {
-			ngo = optional.get();
-		}
-		ngo.setNgoregstatus("Verified");
-		
-		//Donor newdonor=new Donor(donor.getDrname(),donor.getDremail(),passwordEncoder.encode(donor.getDrpassword()),donor.getDrrepass(),donor.getDrcity(),donor.getDrphone(),donor.getDrpincode(),donor.getdraddress(),Arrays.asList(new UserRole("ROLE USER")));
-		 ngorepo.save(ngo);
-		
-	}*/
+	
 
 	@Override
 	public List<CompleteDonationDetails> getAllDonations() {
 		// TODO Auto-generated method stub
 		String cityname="";
-		
-		org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (!(authentication instanceof AnonymousAuthenticationToken)) {
-		   UserDetails userPrincipal = (UserDetails)authentication.getPrincipal(); 
-		   String ngoemail= userPrincipal.getUsername();
+		UserDetails obj = donorservice.getLoggedInUser();
+		   String ngoemail= obj.getUsername();
 		
 		NGO ngo  = ngorepo.findByNgoemail(ngoemail);
 		cityname=ngo.getNgocity();
-		}
-		//CompleteDonationDetails obj=(CompleteDonationDetails) repo.findByCity(cityname);
 		
-		return repo.findByCityAndDonationstatus(cityname, "Not Booked");
-		//return repo.findByCity(cityname);
+		return repo.findByCityAndDonationstatus(cityname,DonationStatus.Not_Booked);
 		
 		
 	}
@@ -120,17 +100,15 @@ public class NGOServiceImpl implements NGOService {
 		if (optional.isPresent()) {
 			cdetails = optional.get();
 		}
-		org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (!(authentication instanceof AnonymousAuthenticationToken)) {
-		   UserDetails userPrincipal = (UserDetails)authentication.getPrincipal(); 
-		   String ngoemail= userPrincipal.getUsername();
+		UserDetails obj = donorservice.getLoggedInUser();
+		   String ngoemail= obj.getUsername();
 		   NGO ngo  = ngorepo.findByNgoemail(ngoemail);
 		  
 		   cdetails.setNgo_name(ngo.getNgoname());
 		   cdetails.setNgo_id(ngo.getId());
 		   cdetails.setNgo_phoneno(ngo.getNgophone());
 		   cdetails.setNgo_address(ngo.getNgoaddress());
-		   cdetails.setDonationstatus("Booked");
+		   cdetails.setDonationstatus(DonationStatus.Booked);
 		   Optional<Donation> optional1=donationrepo.findById(cdetails.getDonation_id());
 		   Donation d=null;
 		   if (optional1.isPresent()) {
@@ -142,4 +120,4 @@ public class NGOServiceImpl implements NGOService {
 	}
 
 	
-}
+

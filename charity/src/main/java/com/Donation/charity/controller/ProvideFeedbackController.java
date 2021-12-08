@@ -15,13 +15,6 @@ import com.Donation.charity.service.DonorService;
 
 @Controller
 @RequestMapping("/feedbackform")
-
-/*@RequestMapping(value = "/", method = RequestMethod.GET) 
-public String displayLogin(Feedback feedback) { 
-    model.addAttribute("feedback", new Feedback()); 
-    return "feedback"; 
-}*/
-
 public class ProvideFeedbackController {
 	@Autowired
 	private DonorService donorservice;

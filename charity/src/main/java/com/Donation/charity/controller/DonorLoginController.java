@@ -33,9 +33,7 @@ public class DonorLoginController {
 	
 	@PostMapping
 	public String registerDonorAC(@ModelAttribute("donor") Donor donorreg) {
-		donorservice.save(donorreg);
-		//return "donorlist";
-		//return "redirect:/registration?success";
+		donorservice.saveDonorDetails(donorreg);
 		return "redirect:/donorsignin?success"; 
 }
 }

@@ -4,6 +4,8 @@ import java.util.Collection;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,16 +17,15 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="Project_DAs_new",uniqueConstraints = @UniqueConstraint(columnNames = "daemail"))
+@Table(name="Project_DAs_new_12",uniqueConstraints = @UniqueConstraint(columnNames = "daemail"))
 public class DA {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	private String daregstatus="NotVerified";
+	@Enumerated(EnumType.STRING)
+	private RegistrationStatus registrationstatus=RegistrationStatus.Not_Verified;
 	private String daname;
-	private String daregistrationnumber;
-	private String daregdate;
 	private String daemail;
 	private String dapassword;
 	private String darepassword;
@@ -33,7 +34,7 @@ public class DA {
 	private String dapincode;
 	private String daaddress;
 	
-	//@Column(columnDefinition = "varchar(255) default 'NotVerified'")
+	
 
 	
 	 @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -51,14 +52,13 @@ public class DA {
 	public DA() {
 		
 	}
-	public DA(String daregstatus, String daname, String daregistrationnumber, String daregdate, String daemail,
+	public DA(RegistrationStatus registrationstatus, String daname, String daemail,
 			String dapassword, String darepassword, String daphone, String dacity, String dapincode, String daaddress,
 			Collection<DARole> daroles) {
 		super();
-		this.daregstatus = daregstatus;
+		this.registrationstatus=registrationstatus;
 		this.daname = daname;
-		this.daregistrationnumber = daregistrationnumber;
-		this.daregdate = daregdate;
+		
 		this.daemail = daemail;
 		this.dapassword = dapassword;
 		this.darepassword = darepassword;
@@ -72,11 +72,12 @@ public class DA {
 	
 	
 
-	public String getDaregstatus() {
-		return daregstatus;
+	
+	public RegistrationStatus getRegistrationstatus() {
+		return registrationstatus;
 	}
-	public void setDaregstatus(String daregstatus) {
-		this.daregstatus = daregstatus;
+	public void setRegistrationstatus(RegistrationStatus registrationstatus) {
+		this.registrationstatus = registrationstatus;
 	}
 	public String getDaname() {
 		return daname;
@@ -84,18 +85,7 @@ public class DA {
 	public void setDaname(String daname) {
 		this.daname = daname;
 	}
-	public String getDaregistrationnumber() {
-		return daregistrationnumber;
-	}
-	public void setDaregistrationnumber(String daregistrationnumber) {
-		this.daregistrationnumber = daregistrationnumber;
-	}
-	public String getDaregdate() {
-		return daregdate;
-	}
-	public void setDaregdate(String daregdate) {
-		this.daregdate = daregdate;
-	}
+
 	public String getDaemail() {
 		return daemail;
 	}

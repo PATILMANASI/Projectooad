@@ -24,22 +24,21 @@ import javax.persistence.UniqueConstraint;
 
 
 @Entity
-@Table(name="ProjectDonorsNew_",uniqueConstraints = @UniqueConstraint(columnNames = "dremail"))
+@Table(name="ProjectDonorsNew_12",uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class Donor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	
-
-	private String drname;
-	private String dremail;
-	private String drpassword;
-	private String drrepass;
-	private String drcity;
-	private String drphone;
-	private String drpincode;
-	private String draddress;
+	private String name;
+	private String email;
+	private String password;
+	private String repassword;
+	private String city;
+	private String phonenumber;
+	private String pincode;
+	private String address;
 	
 	 @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	    @JoinTable(
@@ -53,9 +52,9 @@ public class Donor {
 	 
 	
 
-/*	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	 @JoinColumn(name = "donor_fid", referencedColumnName = "id")
-	 private Set<Donation> donations=new HashSet<>();*/
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	 @JoinColumn(name = "donor_id", referencedColumnName = "id")
+	 private Set<Donation> donations=new HashSet<>();
 	 
 	 
 	
@@ -64,17 +63,17 @@ public Donor() {
 		
 	}
 	
-	public Donor(String drname, String dremail, String drpassword,String drrepass, String drcity, String drphone, String drpincode,
-			String draddress, Collection < UserRole > userroles) {
+	public Donor(String name, String email, String password,String repassword, String city, String phonenumber, String pincode,
+			String address, Collection < UserRole > userroles) {
 		super();
-		this.drname = drname;
-		this.dremail = dremail;
-		this.drpassword = drpassword;
-		this.drrepass=drrepass;
-		this.drcity = drcity;
-		this.drphone = drphone;
-		this.drpincode = drpincode;
-		this.draddress = draddress;
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.repassword=repassword;
+		this.city = city;
+		this.phonenumber = phonenumber;
+		this.pincode = pincode;
+		this.address = address;
 		this.userroles=userroles;
 	}
 	public int getId() {
@@ -85,68 +84,69 @@ public Donor() {
 		this.id = id;
 	}
 	
-	public String getDrname() {
-		return drname;
+	
+	public String getName() {
+		return name;
 	}
 
-	public void setDrname(String drname) {
-		this.drname = drname;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getDremail() {
-		return dremail;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setDremail(String dremail) {
-		this.dremail = dremail;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public String getDrpassword() {
-		return drpassword;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setDrpassword(String drpassword) {
-		this.drpassword = drpassword;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public String getDrcity() {
-		return drcity;
+	public String getRepassword() {
+		return repassword;
 	}
 
-	public void setDrcity(String drcity) {
-		this.drcity = drcity;
+	public void setRepassword(String repassword) {
+		this.repassword = repassword;
 	}
 
-	public String getDrphone() {
-		return drphone;
+	public String getCity() {
+		return city;
 	}
 
-	public void setDrphone(String drphone) {
-		this.drphone = drphone;
+	public void setCity(String city) {
+		this.city = city;
 	}
 
-	public String getDrpincode() {
-		return drpincode;
+	public String getPhonenumber() {
+		return phonenumber;
 	}
 
-	public void setDrpincode(String drpincode) {
-		this.drpincode = drpincode;
+	public void setPhonenumber(String phonenumber) {
+		this.phonenumber = phonenumber;
 	}
 
-	public String getdraddress() {
-		return draddress;
+	public String getPincode() {
+		return pincode;
 	}
 
-	public void setdraddress(String draddress) {
-		this.draddress = draddress;
+	public void setPincode(String pincode) {
+		this.pincode = pincode;
 	}
 
-	public String getDrrepass() {
-		return drrepass;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setDrrepass(String drrepass) {
-		this.drrepass = drrepass;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public Collection < UserRole > getUserroles() {

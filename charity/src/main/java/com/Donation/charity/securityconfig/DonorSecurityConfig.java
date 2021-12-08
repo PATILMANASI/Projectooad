@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.Donation.charity.service.DonorService;
+import com.Donation.charity.service.NGOService;
 
 
 
@@ -34,7 +35,7 @@ public class DonorSecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/","/donorsignin**","/admin**","/verifyNGO**","/verifyDA**","/DAlogin","/dasignin","/ngologin","/ngosignin","/donorsignin","/markDAVerified/{id}","/markNGOVerified/{id}",
                 "/registration**","redirect:/verifyNGO","/viewDonation","/DAhome","/AdminHome","/verifyNGO","/viewOrders",
                 "/js/**","/DisplayNoOrders","/verifyDA","/DisplayNoDAs","/About","/NGOHome","/feedbackform","/viewFeedback",
-                "/css/**","/NoNGOAvailable",
+                "/css/**","/NoNGOAvailable","/markNGORejected/{id}","/markDARejected/{id}",
                 "/images/**").permitAll()
 //                "/webjars/**").permitAll()
             .anyRequest().authenticated()
@@ -69,4 +70,6 @@ public class DonorSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
     }
+    
 }
+

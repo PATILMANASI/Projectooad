@@ -27,5 +27,9 @@ public List<DA>  getAllDAs();
 public void MarkDAVerified(int id);
 
 public List<Feedback> showAllFeedbacks();
+
+public void markNGORejected(int id);
+
+public void MarkDARejected(int id);
   
 }

@@ -9,8 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+
+
 @Entity
-@Table
+@Table(name="CompleteDonationDetails_1")
 public class CompleteDonationDetails {
 	public int getId() {
 		return id;
@@ -38,14 +40,16 @@ public class CompleteDonationDetails {
 	private String city;
 	private String da_name;
 	private int daid;
-	private String donationstatus="Not Booked";
+	
+	@Enumerated(EnumType.STRING)
+	private DonationStatus donationstatus;
 	
 	public CompleteDonationDetails() {
 		super();
 	}
 	public CompleteDonationDetails(int donation_id,int donor_id, int ngo_id, String description, DonationCategory donationcategory,
 			String otherCategory, String comment, String donor_name, String ngo_name, String donor_address,String city,String da_name,int da_id,
-			String ngo_address,String donor_phoneno,String ngo_phoneno) {
+			String ngo_address,String donor_phoneno,String ngo_phoneno,DonationStatus donationstatus) {
 		super();
 		this.donation_id=donation_id;
 		this.donor_id = donor_id;
@@ -61,8 +65,9 @@ public class CompleteDonationDetails {
 		this.city=city;
 		this.daid=da_id;
 		this.da_name=da_name;
-		this.setDonor_phoneno(donor_phoneno);
-		this.setNgo_phoneno(ngo_phoneno);
+		this.donor_phoneno=donor_phoneno;
+		this.ngo_phoneno=ngo_phoneno;
+		this.donationstatus=donationstatus;
 	}
 	public int getDonor_id() {
 		return donor_id;
@@ -152,14 +157,16 @@ public class CompleteDonationDetails {
 	/**
 	 * @return the donation_status
 	 */
-	public String getDonationstatus() {
+	
+	/**
+	 * @param booked the donation_status to set
+	 */
+
+	public DonationStatus getDonationstatus() {
 		return donationstatus;
 	}
-	/**
-	 * @param donation_status the donation_status to set
-	 */
-	public void setDonationstatus(String donation_status) {
-		this.donationstatus = donation_status;
+	public void setDonationstatus(DonationStatus donationstatus) {
+		this.donationstatus = donationstatus;
 	}
 	/**
 	 * @return the da_name

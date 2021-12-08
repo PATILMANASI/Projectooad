@@ -27,7 +27,7 @@ public class DAAcceptOrderController {
 		return "DAAcceptOrder";
 	}
 	@GetMapping("/bookOrder/{id}")
-	public String markNGOVerified(@PathVariable (value="id") int id) {
+	public String bookOrder(@PathVariable (value="id") int id) {
 		this.daservice.bookOrder(id);
 		return "redirect:/viewOrders";
 

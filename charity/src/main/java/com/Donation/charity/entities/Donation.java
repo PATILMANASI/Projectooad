@@ -19,7 +19,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-@Table(name="DonationDetailsNewTable")
+@Table(name="DonationDetailsNewTable_12")
 public class Donation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,15 +30,18 @@ public class Donation {
 	private int da_id;
 	
 	private String description;
-	/**
-	 * 
-	 */
+	
 	private String othercategory;
 
     private String city;
 
 	private String comment;
-//	private String username;
+	@Enumerated(EnumType.STRING)
+	private DonationStatus donationstatus=DonationStatus.Not_Booked;
+	
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "donor_id", referencedColumnName = "id",insertable = false, updatable = false)
+	private Donor donor;
 	
 	
 	
@@ -78,22 +81,13 @@ public class Donation {
 		this.comment = comment;
 		this.donationcategory = donationcategory;
 		this.city=city;
+
 	}
 
-
-
-	/*	public Donation(String othercategory,String comment, String description) {
-		super();
-	//	this.category=category;
-		this.othercategory=othercategory;
-		this.comment = comment;
-		this.description = description;
-	}*/
 	
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
 
 
 	public int getId() {
@@ -150,51 +144,51 @@ public class Donation {
 
 
 
-	/**
-	 * @return the ngo_id
-	 */
+	
 	public int getNgo_id() {
 		return ngo_id;
 	}
 
 
 
-	/**
-	 * @param ngo_id the ngo_id to set
-	 */
+
 	public void setNgo_id(int ngo_id) {
 		this.ngo_id = ngo_id;
 	}
 
 
 
-	/**
-	 * @return the da_id
-	 */
+	
 	public int getDa_id() {
 		return da_id;
 	}
 
 
 
-	/**
-	 * @param da_id the da_id to set
-	 */
 	public void setDa_id(int da_id) {
 		this.da_id = da_id;
 	}
 
-	
 
-	
 
-/*	public int getDonor_fid() {
-		return donor_fid;
+	public DonationStatus getDonationstatus() {
+		return donationstatus;
 	}
 
-	public void setDonor_fid(int donor_fid) {
-		this.donor_fid = donor_fid;
-	}*/
+
+
+	public void setDonationstatus(DonationStatus donationstatus) {
+		this.donationstatus = donationstatus;
+	}
+
+
+	
+
+
+	
+
+	
+
 
 	
 	

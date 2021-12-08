@@ -35,4 +35,10 @@ public class VerifyNGOController {
 		return "redirect:/verifyNGO";
 
 }
+	@GetMapping("/markNGORejected/{id}")
+	public String markNGORehected(@PathVariable (value="id") int id) {
+		this.adminservice.markNGORejected(id);
+		return "redirect:/verifyNGO";
+
+}
 }

@@ -37,6 +37,12 @@ public class VerifyDAController {
 		return "redirect:/verifyDA";
 
 }
+	@GetMapping("/markDARejected/{id}")
+	public String markDARejected(@PathVariable (value="id") int id) {
+		this.adminservice.MarkDARejected(id);
+		return "redirect:/verifyDA";
+
+}
 	
 
 }

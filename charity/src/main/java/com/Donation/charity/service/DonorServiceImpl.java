@@ -20,31 +20,42 @@ import org.springframework.stereotype.Service;
 
 import com.Donation.charity.entities.CompleteDonationDetails;
 import com.Donation.charity.entities.Donation;
+import com.Donation.charity.entities.DonationStatus;
 import com.Donation.charity.entities.Donor;
 import com.Donation.charity.entities.Feedback;
 import com.Donation.charity.entities.UserRole;
 import com.Donation.charity.repository.CompleteDonationDetailsRepository;
 import com.Donation.charity.repository.DonationRepositoryService;
+import com.Donation.charity.repository.DonorRepositoryService;
 import com.Donation.charity.repository.FeedbackRepositoryService;
-import com.Donation.charity.repository.RepositoryService;
+
 import com.Donation.charity.entities.Donor;
 
 @Service
 public class DonorServiceImpl implements DonorService{
 	@Autowired
-	private RepositoryService donorrepo;
+	private DonorRepositoryService donorrepo;
 	
 	@Autowired
 	private DonationRepositoryService donationrepo;
 	
 	@Autowired
 	private FeedbackRepositoryService feedbackrepo;
-
 	
+	public UserDetails getLoggedInUser() {
+		UserDetails loggedInUser = null;	
+		
+	org.springframework.security.core.Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	if (!(auth instanceof AnonymousAuthenticationToken)) {
+	    loggedInUser = (UserDetails)auth.getPrincipal(); 
+	}
+	return loggedInUser;
+	
+	}
 	@Autowired
   private CompleteDonationDetailsRepository completerepo;
 	
-	public DonorServiceImpl(RepositoryService donorrepo) {
+	public DonorServiceImpl(DonorRepositoryService donorrepo) {
 		super();
 		this.donorrepo = donorrepo;
 	}
@@ -55,8 +66,8 @@ public class DonorServiceImpl implements DonorService{
 
 	
 	@Override
-	public Donor save(Donor donorreg) {
-		Donor donor=new Donor(donorreg.getDrname(),donorreg.getDremail(),passwordEncoder.encode(donorreg.getDrpassword()),donorreg.getDrrepass(),donorreg.getDrcity(),donorreg.getDrphone(),donorreg.getDrpincode(),donorreg.getdraddress(),Arrays.asList(new UserRole("ROLE USER")));
+	public Donor saveDonorDetails(Donor donorreg) {
+		Donor donor=new Donor(donorreg.getName(),donorreg.getEmail(),passwordEncoder.encode(donorreg.getPassword()),donorreg.getRepassword(),donorreg.getCity(),donorreg.getPhonenumber(),donorreg.getPincode(),donorreg.getAddress(),Arrays.asList(new UserRole("ROLE USER")));
 		return donorrepo.save(donor);
 	}
 
@@ -67,12 +78,12 @@ public class DonorServiceImpl implements DonorService{
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
 		
-		 Donor donor = donorrepo.findByDremail(username);
+		 Donor donor = donorrepo.findByEmail(username);
 	        if (donor == null) {
 	            throw new UsernameNotFoundException("Invalid username or password.");
 	        }
-	        return new org.springframework.security.core.userdetails.User(donor.getDremail(),
-	            donor.getDrpassword(),
+	        return new org.springframework.security.core.userdetails.User(donor.getEmail(),
+	            donor.getPassword(),
 	            mapRolesToAuthorities(donor.getUserroles()));
 	
 	}
@@ -91,31 +102,24 @@ public class DonorServiceImpl implements DonorService{
 	public void placeDonation(Donation donation) {
 		// TODO Auto-generated method stub
 		String donoremail;
-		//	CustomDonorDetailsService principal = (CustomDonorDetailsService)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
-			  // DonorDetails principal = (DonorDetails)
-			  // SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-			if (!(authentication instanceof AnonymousAuthenticationToken)) {
-			   UserDetails userPrincipal = (UserDetails)authentication.getPrincipal(); 
+			   UserDetails obj = getLoggedInUser();
+			   donoremail= obj.getUsername();
 			
-			   donoremail= userPrincipal.getUsername();
-			
-			Donor donor  = donorrepo.findByDremail(donoremail);
-//			Donor donor=null;
+			Donor donor  = donorrepo.findByEmail(donoremail);
 			
 			donation.setDonor_id(donor.getId());
-			donation.setCity(donor.getDrcity());
+			donation.setCity(donor.getCity());
 			
 				 
 			Donation donate=new Donation(donation.getDonor_id(),donation.getDescription(),donation.getOthercategory(),donation.getComment(),donation.getDonationcategory(),donation.getCity());
 			
 		    donationrepo.save(donate);
 			
-		    CompleteDonationDetails details=new CompleteDonationDetails(donate.getId(),donor.getId(), 0,  donation.getDescription(), donation.getDonationcategory(),donation.getOthercategory(),donation.getComment(), donor.getDrname(), "", donor.getdraddress(),donor.getDrcity(),"",0,"",donor.getDrphone(),"");
+		    CompleteDonationDetails details=new CompleteDonationDetails(donate.getId(),donor.getId(), 0,  donation.getDescription(), donation.getDonationcategory(),donation.getOthercategory(),donation.getComment(), donor.getName(), "", donor.getAddress(),donor.getCity(),"",0,"",donor.getPhonenumber(),"",donate.getDonationstatus());
 			completerepo.save(details) ;
 			}
 		
-	}
+	
 
 
 

@@ -1,10 +1,14 @@
 package com.Donation.charity.entities;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,19 +16,20 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.ColumnDefault;
 
 @Entity
-@Table(name="NGOs_3rdDec",uniqueConstraints = @UniqueConstraint(columnNames = "ngoemail"))
+@Table(name="NGOs_3rdDec_",uniqueConstraints = @UniqueConstraint(columnNames = "ngoemail"))
 public class NGO {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	private String ngoregstatus="NotVerified";
+	@Enumerated(EnumType.STRING)
+	private RegistrationStatus registrationstatus=RegistrationStatus.Not_Verified;
 	private String ngoname;
 	private String ngoregistrationnumber;
 	private String ngoregdate;
@@ -36,7 +41,9 @@ public class NGO {
 	private String ngopincode;
 	private String ngoaddress;
 	
-	//@Column(columnDefinition = "varchar(255) default 'NotVerified'")
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	 @JoinColumn(name = "ngo_id", referencedColumnName = "id")
+	 private Set<Donation> donations=new HashSet<>();
 
 	
 	 @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -162,14 +169,16 @@ public class NGO {
 		this.id = id;
 	}
 
-	public String getNgoregstatus() {
-		return ngoregstatus;
+
+	
+	public RegistrationStatus getRegistrationstatus() {
+		return registrationstatus;
 	}
 
-	public void setNgoregstatus(String ngoregstatus) {
-		this.ngoregstatus = ngoregstatus;
+	public void setRegistrationstatus(RegistrationStatus registrationstatus) {
+		this.registrationstatus = registrationstatus;
 	}
-	
+
 	public Collection<NGORole> getNgoroles() {
 		return ngoroles;
 	}

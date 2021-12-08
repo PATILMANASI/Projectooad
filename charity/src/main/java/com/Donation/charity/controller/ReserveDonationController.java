@@ -29,7 +29,7 @@ public class ReserveDonationController {
 	}
 	
 	@GetMapping("/bookDonation/{id}")
-	public String markNGOVerified(@PathVariable (value="id") int id) {
+	public String bookDonation(@PathVariable (value="id") int id) {
 		this.ngoservice.bookDonation(id);
 		return "redirect:/viewDonation";
 

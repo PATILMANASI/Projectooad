@@ -10,6 +10,7 @@ import com.Donation.charity.entities.Admin;
 import com.Donation.charity.entities.DA;
 import com.Donation.charity.entities.Feedback;
 import com.Donation.charity.entities.NGO;
+import com.Donation.charity.entities.RegistrationStatus;
 import com.Donation.charity.repository.AdminRepositoryService;
 import com.Donation.charity.repository.CompleteDonationDetailsRepository;
 import com.Donation.charity.repository.DARepositoryService;
@@ -44,8 +45,8 @@ public class AdminServiceImpl implements AdminService{
 		  }
 	@Override
 	public List<NGO> getAllNGOs() {
-		String name="NotVerified";
-		return ngorepo.findByNgoregstatus(name);
+		
+		return ngorepo.findByRegistrationstatus(RegistrationStatus.Not_Verified);
 		
 	}
 
@@ -57,17 +58,16 @@ public class AdminServiceImpl implements AdminService{
 		if (optional.isPresent()) {
 			ngo = optional.get();
 		}
-		ngo.setNgoregstatus("Verified");
+		ngo.setRegistrationstatus(RegistrationStatus.Verified);
 		
-		//Donor newdonor=new Donor(donor.getDrname(),donor.getDremail(),passwordEncoder.encode(donor.getDrpassword()),donor.getDrrepass(),donor.getDrcity(),donor.getDrphone(),donor.getDrpincode(),donor.getdraddress(),Arrays.asList(new UserRole("ROLE USER")));
 		 ngorepo.save(ngo);
 		
 	}
 	
 	@Override
 	public List<DA> getAllDAs() {
-		String name="NotVerified";
-		return darepo.findByDaregstatus(name);
+		
+		return darepo.findByRegistrationstatus(RegistrationStatus.Not_Verified);
 		}
 	
 	@Override
@@ -78,16 +78,38 @@ public class AdminServiceImpl implements AdminService{
 		if (optional.isPresent()) {
 			da = optional.get();
 		}
-		da.setDaregstatus("Verified");
-		
-		//Donor newdonor=new Donor(donor.getDrname(),donor.getDremail(),passwordEncoder.encode(donor.getDrpassword()),donor.getDrrepass(),donor.getDrcity(),donor.getDrphone(),donor.getDrpincode(),donor.getdraddress(),Arrays.asList(new UserRole("ROLE USER")));
+		da.setRegistrationstatus(RegistrationStatus.Verified);
 		 darepo.save(da);
 		
 	}
 	@Override
 	public List<Feedback> showAllFeedbacks() {
-		// TODO Auto-generated method stub
 		return feedbackrepo.findAll();
+	}
+	@Override
+	public void markNGORejected(int id) {
+		// TODO Auto-generated method stub
+		Optional<NGO> optional = ngorepo.findById( id);
+		NGO ngo=null;
+		if (optional.isPresent()) {
+			ngo = optional.get();
+		}
+		ngo.setRegistrationstatus(RegistrationStatus.Rejected);
+		
+		 ngorepo.save(ngo);
+		
+	}
+	@Override
+	public void MarkDARejected(int id) {
+		// TODO Auto-generated method stub
+		Optional<DA> optional = darepo.findById( id);
+		DA da=null;
+		if (optional.isPresent()) {
+			da = optional.get();
+		}
+		da.setRegistrationstatus(RegistrationStatus.Rejected);
+		 darepo.save(da);
+		
 	}
 
 

@@ -47,8 +47,7 @@ public class MakeDonationController {
 		
 		
 		donorservice.placeDonation(donation);
-		//return "donorlist";
-		//return "redirect:/registration?success";
+		
 		return "redirect:/makedonation?success";
 }
 
