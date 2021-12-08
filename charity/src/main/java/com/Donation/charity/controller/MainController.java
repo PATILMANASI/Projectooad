@@ -100,6 +100,10 @@ public class MainController {
 	public String showNoNGOAvailable() {
 		return "NoNGOAvailable";
 	}
+	@GetMapping("/Index")
+	public String showIndexPage() {
+		return "index";
+	}
 	
 
 }

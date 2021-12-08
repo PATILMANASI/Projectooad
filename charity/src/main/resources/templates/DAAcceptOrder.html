@@ -29,11 +29,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
+                    
                     <li class="nav-item">
-                        <a class="nav-link" href="#">contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">about</a>
+                        <a class="nav-link" th:href="@{/About}">about</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link">Welcome Back</a>
@@ -61,7 +59,6 @@
                 <table class="table table-hover">
                     <thead>
                       <tr>
-                       <th>Order id </th>
                         <th>Donor Name </th>
                         <th>Donor Address</th>
                         <th>NGO Name</th>
@@ -71,7 +68,6 @@
                     </thead>
                     <tbody>
                         <tr th:each = "orders : ${listOrders}">
-                            <td th:text = "${orders.id}"></td>
                             <td th:text = "${orders.donor_name}"></td>
                             <td th:text="${orders.donor_address}"></td>
                             <td th:text="${orders.ngo_name}"></td>
@@ -81,7 +77,10 @@
                                     <i class='bx bxs-user-check'></i>
                                 </a>
 
-                                
+                                <a  class="btn btn-outline-danger" >Reject 
+                                    <i class='bx bxs-user-x'></i>
+                                </a>
+
                             </td>
                         </tr>
                     </tbody>
@@ -102,7 +101,7 @@
 
         <!-- Copyright -->            
         
-        <div class="footer-copyright text-center py-3 blue">� 2021 Copyright:
+        <div class="footer-copyright text-center py-3 blue">© 2021 Copyright:
             <a href="#"> HelpingHands.com</a>
             
         </div>

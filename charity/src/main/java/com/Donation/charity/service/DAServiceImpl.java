@@ -24,7 +24,7 @@ import com.Donation.charity.entities.NGO;
 import com.Donation.charity.repository.CompleteDonationDetailsRepository;
 import com.Donation.charity.repository.DARepositoryService;
 import com.Donation.charity.repository.DonationRepositoryService;
-;
+
 
 
 @Service
