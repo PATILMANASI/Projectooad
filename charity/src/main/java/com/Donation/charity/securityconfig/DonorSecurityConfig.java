@@ -20,7 +20,7 @@ import com.Donation.charity.service.NGOService;
 
 @Configuration
 @EnableWebSecurity
-@Order(1)
+@Order(2)
 public class DonorSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired

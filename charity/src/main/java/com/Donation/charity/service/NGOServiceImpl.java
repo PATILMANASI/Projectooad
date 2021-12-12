@@ -55,7 +55,10 @@ public class NGOServiceImpl implements NGOService {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
         if((ngo.getRegistrationstatus()).equals(RegistrationStatus.Not_Verified)) {
-        	throw new UsernameNotFoundException("Not verified.");
+        	throw new UsernameNotFoundException("NGO details not verified by Admin");
+        }
+        else  if((ngo.getRegistrationstatus()).equals(RegistrationStatus.Rejected)) {
+        	throw new UsernameNotFoundException("NGO request rejected by Admin");
         }
         else 
         return new org.springframework.security.core.userdetails.User(ngo.getEmail(),

@@ -58,8 +58,12 @@ public class DAServiceImpl implements DAService {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
         if((da.getRegistrationstatus()).equals(RegistrationStatus.Not_Verified) ){
-        	throw new UsernameNotFoundException("Not verified.");
+        	throw new UsernameNotFoundException("DA details not verified by admin.");
         }
+        else  if((da.getRegistrationstatus()).equals(RegistrationStatus.Rejected)) {
+        	throw new UsernameNotFoundException("DA request rejected by Admin");
+        }
+        else
         return new org.springframework.security.core.userdetails.User(da.getEmail(),
             da.getPassword(),
             mapRolesToAuthorities(da.getUserroles()));

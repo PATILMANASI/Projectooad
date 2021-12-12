@@ -19,7 +19,7 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(name="DeliveryAgent")
 public class DA extends User{
-
+	@Enumerated(EnumType.STRING)
 	private RegistrationStatus registrationstatus=RegistrationStatus.Not_Verified;
 	
 	
