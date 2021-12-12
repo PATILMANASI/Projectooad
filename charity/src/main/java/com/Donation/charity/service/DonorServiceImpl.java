@@ -29,7 +29,7 @@ import com.Donation.charity.repository.DonationRepositoryService;
 import com.Donation.charity.repository.DonorRepositoryService;
 import com.Donation.charity.repository.FeedbackRepositoryService;
 
-import com.Donation.charity.entities.Donor;
+import com.Donation.charity.entities.Donor; 
 
 @Service
 public class DonorServiceImpl implements DonorService{
@@ -107,11 +107,11 @@ public class DonorServiceImpl implements DonorService{
 			
 			Donor donor  = donorrepo.findByEmail(donoremail);
 			
-			donation.setDonor_id(donor.getId());
+			donation.setDonorid(donor.getId());
 			donation.setCity(donor.getCity());
 			
 				 
-			Donation donate=new Donation(donation.getDonor_id(),donation.getDescription(),donation.getOthercategory(),donation.getComment(),donation.getDonationcategory(),donation.getCity());
+			Donation donate=new Donation(donation.getDonorid(),donation.getDescription(),donation.getOthercategory(),donation.getComment(),donation.getDonationcategory(),donation.getCity(),donation.getDonationstatus());
 			
 		    donationrepo.save(donate);
 			
@@ -127,8 +127,21 @@ public class DonorServiceImpl implements DonorService{
 	@Override
 	public void provideFeedback(Feedback feedbackreg) {
 		// TODO Auto-generated method stub
-		Feedback feedback1=new Feedback(feedbackreg.getName(),feedbackreg.getFdemail(),feedbackreg.getFdsubject(),feedbackreg.getFdmessage());
+		Feedback feedback1=new Feedback(feedbackreg.getName(),feedbackreg.getEmail(),feedbackreg.getSubject(),feedbackreg.getMessage());
 	 feedbackrepo.save(feedback1);
+	}
+
+
+
+
+	@Override
+	public List<Donation> getMyDonations() {
+		// TODO Auto-generated method stub
+		UserDetails obj = getLoggedInUser();
+		String donoremail= obj.getUsername();
+		Donor donor  = donorrepo.findByEmail(donoremail);
+		return donationrepo.findByDonorid(donor.getId());
+		
 	}
 	
 	

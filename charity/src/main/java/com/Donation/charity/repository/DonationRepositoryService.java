@@ -10,5 +10,9 @@ import com.Donation.charity.entities.NGO;
 @Repository
 public interface DonationRepositoryService extends JpaRepository<Donation, Integer> {
 
+
+
+	List<Donation> findByDonorid(int id);
+
 //	List<Donation> findByCity(String city);
 }

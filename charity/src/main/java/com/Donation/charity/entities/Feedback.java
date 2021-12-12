@@ -9,7 +9,7 @@ import javax.persistence.UniqueConstraint;
 
 
 @Entity
-@Table(name="ProjectFeedbackNew_",uniqueConstraints = @UniqueConstraint(columnNames = "fdemail"))
+@Table(name="ProjectFeedbackNew_",uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class Feedback {
 	
 	@Id
@@ -17,20 +17,20 @@ public class Feedback {
 	private int id;
 	
 	private String name;
-	private String fdemail;
-	private String fdsubject;
-	private String fdmessage;
+	private String email;
+	private String subject;
+	private String message;
 	
 	public Feedback() {
 		super();
 	}
 
-	public Feedback(String name, String fdemail, String fdsubject, String fdmessage) {
+	public Feedback(String name, String email, String subject, String message) {
 		super();
 		this.name = name;
-		this.fdemail = fdemail;
-		this.fdsubject = fdsubject;
-		this.fdmessage = fdmessage;
+		this.email = email;
+		this.setSubject(subject);
+		this.message = message;
 		
 	}
 	
@@ -47,23 +47,32 @@ public class Feedback {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getFdemail() {
-		return fdemail;
+	public String getEmail() {
+		return email;
 	}
-	public void setFdemail(String fdemail) {
-		this.fdemail = fdemail;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public String getFdsubject() {
-		return fdsubject;
+
+	public String getMessage() {
+		return message;
 	}
-	public void setFdsubject(String fdsubject) {
-		this.fdsubject = fdsubject;
+	public void setMessage(String message) {
+		this.message = message;
 	}
-	public String getFdmessage() {
-		return fdmessage;
+
+	/**
+	 * @return the subject
+	 */
+	public String getSubject() {
+		return subject;
 	}
-	public void setFdmessage(String fdmessage) {
-		this.fdmessage = fdmessage;
+
+	/**
+	 * @param subject the subject to set
+	 */
+	public void setSubject(String subject) {
+		this.subject = subject;
 	}
 
 

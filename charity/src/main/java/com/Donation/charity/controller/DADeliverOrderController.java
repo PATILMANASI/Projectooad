@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.Donation.charity.entities.CompleteDonationDetails;
 import com.Donation.charity.service.DAService;
@@ -22,11 +23,18 @@ public class DADeliverOrderController {
 			model.addAttribute("listAcceptedOrders",daservice.getAllAcceptedOrders());
 			List<CompleteDonationDetails> obj=daservice.getAllAcceptedOrders();
 			if (obj.isEmpty()) {
-				return "redirect:/DisplayNoOrders?success";
+				return "redirect:/NOOrdersToUpdateStatus?success";
+
 			}
 			return "update_order_status";
-
 	  }
+			
+	///	@PostMapping("/redirectupdateOrderStatus")
+	//	public String MapToUpdateOrderStatus() {
+	//		return "redirect:/updateOrderStatus?success";
+	//	}
+
+	  
 	  @GetMapping("/OrderPickedUp/{id}")
 		public String OrderPickedUp(@PathVariable (value="id") int id) {
 			this.daservice.updateOrderStatusPickedUp(id);
@@ -39,4 +47,5 @@ public class DADeliverOrderController {
 			return "redirect:/updateOrderStatus";
 
 		}
+
 }

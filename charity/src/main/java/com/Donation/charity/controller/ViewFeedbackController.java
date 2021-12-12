@@ -29,7 +29,7 @@ public class ViewFeedbackController {
 		if (obj.isEmpty()) {
 			return "redirect:/viewFeedback?success";
 		}
-		return "DisplayFeedbacks";
+		return "ViewFeedback";
 	}
 	
 	

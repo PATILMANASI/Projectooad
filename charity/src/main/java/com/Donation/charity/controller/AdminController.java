@@ -32,19 +32,19 @@ public class AdminController {
                                   
     @GetMapping("/adminlogin")    
     public ModelAndView login() {
-     ModelAndView mav = new ModelAndView("adminlogin");
-        mav.addObject("admin", new Admin());
-        return mav;
+     ModelAndView obj = new ModelAndView("adminlogin");
+        obj.addObject("admin", new Admin());
+        return obj;
     }
  
     @PostMapping("/adminlogin")
     public String login(@ModelAttribute("admin") Admin admin ) {
     
-     Admin oauthUser = adminservice.login(admin.getUsername(), admin.getPassword());
+     Admin admin_obj = adminservice.login(admin.getUsername(), admin.getPassword());
     
  
-     System.out.print(oauthUser);
-     if(Objects.nonNull(oauthUser))
+     System.out.print(admin_obj);
+     if(Objects.nonNull(admin_obj))
      {
   
      return "redirect:/AdminHome";

@@ -1,5 +1,7 @@
 package com.Donation.charity.entities;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -215,10 +217,10 @@ public class CompleteDonationDetails {
 		return ngo_phoneno;
 	}
 	/**
-	 * @param ngo_phoneno the ngo_phoneno to set
+	 * @param  the ngo_phoneno to set
 	 */
-	public void setNgo_phoneno(String ngo_phoneno) {
-		this.ngo_phoneno = ngo_phoneno;
+	public void setNgo_phoneno(String phone_no) {
+		this.ngo_phoneno =phone_no ;
 	}
 	
 	

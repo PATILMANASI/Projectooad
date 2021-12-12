@@ -13,7 +13,7 @@ import com.Donation.charity.entities.RegistrationStatus;
 public interface NGORepositoryService extends JpaRepository<NGO, Integer> {
 
 	//List<NGO> findByNgoregstatus(String name);
-	NGO findByNgoemail(String username);
+	NGO findByEmail(String username);
 	List<NGO> findByRegistrationstatus(RegistrationStatus notVerified);
 	
 	

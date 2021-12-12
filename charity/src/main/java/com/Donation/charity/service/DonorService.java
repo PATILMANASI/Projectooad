@@ -23,5 +23,7 @@ public interface DonorService extends UserDetailsService{
 	
 	public UserDetails getLoggedInUser();
 
+	List<Donation> getMyDonations();
+
 
 }

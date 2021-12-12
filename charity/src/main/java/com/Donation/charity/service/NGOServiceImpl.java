@@ -23,8 +23,9 @@ import com.Donation.charity.entities.Donation;
 import com.Donation.charity.entities.DonationStatus;
 import com.Donation.charity.entities.Donor;
 import com.Donation.charity.entities.NGO;
-import com.Donation.charity.entities.NGORole;
+
 import com.Donation.charity.entities.RegistrationStatus;
+import com.Donation.charity.entities.UserRole;
 import com.Donation.charity.repository.CompleteDonationDetailsRepository;
 import com.Donation.charity.repository.DonationRepositoryService;
 
@@ -49,7 +50,7 @@ public class NGOServiceImpl implements NGOService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username)  {
-		NGO ngo = ngorepo.findByNgoemail(username);
+		NGO ngo = ngorepo.findByEmail(username);
        if (ngo == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
@@ -57,20 +58,20 @@ public class NGOServiceImpl implements NGOService {
         	throw new UsernameNotFoundException("Not verified.");
         }
         else 
-        return new org.springframework.security.core.userdetails.User(ngo.getNgoemail(),
-            ngo.getNgopassword(),
-            mapRolesToAuthorities(ngo.getNgoroles()));
+        return new org.springframework.security.core.userdetails.User(ngo.getEmail(),
+            ngo.getPassword(),
+            mapRolesToAuthorities(ngo.getUserroles()));
 	}
 
-	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<NGORole> ngoroles) {
-		 return ngoroles.stream()
+	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<UserRole> collection) {
+		 return collection.stream()
 		            .map(role -> new SimpleGrantedAuthority(role.getUsername()))
 		            .collect(Collectors.toList());
 	}
 
 	@Override
 	public NGO saveNGODetails(NGO ngoreg) {
-		NGO ngo=new NGO(ngoreg.getNgoname(),ngoreg.getNgoregistrationnumber(),ngoreg.getNgoregdate(),ngoreg.getNgoemail(),passwordEncoder.encode(ngoreg.getNgopassword()),ngoreg.getNgorepassword(),ngoreg.getNgophone(),ngoreg.getNgocity(),ngoreg.getNgopincode(),ngoreg.getNgoaddress(),Arrays.asList(new NGORole("USER")));
+		NGO ngo=new NGO(ngoreg.getName(),ngoreg.getNgoregistrationnumber(),ngoreg.getNgoregdate(),ngoreg.getEmail(),passwordEncoder.encode(ngoreg.getPassword()),ngoreg.getRepassword(),ngoreg.getCity(),ngoreg.getPhonenumber(),ngoreg.getPincode(),ngoreg.getAddress(),Arrays.asList(new UserRole("ROLE USER")));
 		return ngorepo.save(ngo);
 	}
 
@@ -84,8 +85,8 @@ public class NGOServiceImpl implements NGOService {
 		UserDetails obj = donorservice.getLoggedInUser();
 		   String ngoemail= obj.getUsername();
 		
-		NGO ngo  = ngorepo.findByNgoemail(ngoemail);
-		cityname=ngo.getNgocity();
+		NGO ngo  = ngorepo.findByEmail(ngoemail);
+		cityname=ngo.getCity();
 		
 		return repo.findByCityAndDonationstatus(cityname,DonationStatus.Not_Booked);
 		
@@ -95,27 +96,30 @@ public class NGOServiceImpl implements NGOService {
 	@Override
 	public void bookDonation(int id) {
 		// TODO Auto-generated method stub
-		Optional<CompleteDonationDetails> optional = repo.findById(id);
-		CompleteDonationDetails cdetails=null;
-		if (optional.isPresent()) {
-			cdetails = optional.get();
-		}
+	
 		UserDetails obj = donorservice.getLoggedInUser();
 		   String ngoemail= obj.getUsername();
-		   NGO ngo  = ngorepo.findByNgoemail(ngoemail);
-		  
-		   cdetails.setNgo_name(ngo.getNgoname());
+		   NGO ngo  = ngorepo.findByEmail(ngoemail);
+			Optional<CompleteDonationDetails> optional = repo.findById(id);
+			CompleteDonationDetails cdetails=null;
+			if (optional.isPresent()) {
+				cdetails = optional.get();
+			}
+		   cdetails.setNgo_name(ngo.getName());
 		   cdetails.setNgo_id(ngo.getId());
-		   cdetails.setNgo_phoneno(ngo.getNgophone());
-		   cdetails.setNgo_address(ngo.getNgoaddress());
+		   cdetails.setNgo_phoneno(ngo.getPhonenumber());
+		   cdetails.setNgo_address(ngo.getAddress());
 		   cdetails.setDonationstatus(DonationStatus.Booked);
+		   repo.save(cdetails);
 		   Optional<Donation> optional1=donationrepo.findById(cdetails.getDonation_id());
 		   Donation d=null;
 		   if (optional1.isPresent()) {
 				d = optional1.get();
-				d.setNgo_id(cdetails.getNgo_id());
+				d.setNgoid(cdetails.getNgo_id());
+				d.setDonationstatus(cdetails.getDonationstatus());
 			}
-		   repo.save(cdetails);
+		  // repo.save(cdetails);
+		   donationrepo.save(d);
 	}
 	}
 

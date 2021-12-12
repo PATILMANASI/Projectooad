@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link 
+rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<meta charset="ISO-8859-1">
+<title>Book Donation</title>
+</head>
+<body>
+
+
+                    <div th:if="${param.success}">
+						<div class="alert alert-info">No Donations available from you city!</div>
+			        </div>
+			          <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>Donor Name</th>
+                        <th>Donor Email</th>
+                        <th>Subject</th>
+                        <th>Message</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each= "feedbacks : ${listFeedbacks}">
+                            <td th:text="${feedbacks.name}"></td>
+                            <td th:text="${feedbacks.email}"></td>
+                            <td th:text="${feedbacks.subject}"></td>
+                               <td th:text="${feedbacks.message}"></td>
+                          
+                          
+                        </tr>
+                    </tbody>
+                  </table>
+			        
+<!-- 
+/*<th:block th:each = "feedbacks : ${listFeedbacks}">
+   <h3 th:text = "${feedbacks.name}">Name:</h3>
+   <p th:text="${feedbacks.fdemail}" >Email</p>
+   <p  th:text="${feedbacks.fdsubject}" >Subject</p>
+<p  th:text="${feedbacks.fdmessage}" >Message</p>
+  
+</th:block>*/ -->
+
+</body>
+</html>

@@ -104,6 +104,11 @@ public class MainController {
 	public String showIndexPage() {
 		return "index";
 	}
+	@GetMapping("NOOrdersToUpdateStatus")
+	public String showNoOrdersAvailable() {
+		return "NOOrdersToUpdateStatus";
+	}
+	
 	
 
 }

@@ -66,14 +66,14 @@
                     </thead>
                     <tbody>
                         <tr th:each="da : ${listDAs}">
-                            <td th:text="${da.daname}"></td>
-                            <td th:text="${da.daaddress}"></td>
+                            <td th:text="${da.name}"></td>
+                            <td th:text="${da.address}"></td>
                             <!--<td th:text="${da.daadharnumber}"></td>-->
                             <td>
                                 <a  class="btn btn-outline-success"th:href="@{/markDAVerified/{id}(id=${da.id})}">Accept 
                                     <i class='bx bxs-user-check'></i>
                                 </a>
-                                <a  class="btn btn-outline-success"th:href="@{/markDARejected/{id}/{id}(id=${da.id})}">Reject
+                                <a  class="btn btn-outline-success"th:href="@{/markDARejected/{id}(id=${da.id})}">Reject
                                     <i class='bx bxs-user-check'></i>
                                 </a>
 

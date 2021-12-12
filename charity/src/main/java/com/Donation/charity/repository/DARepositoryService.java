@@ -9,6 +9,6 @@ import com.Donation.charity.entities.RegistrationStatus;
 public interface DARepositoryService extends JpaRepository<DA, Integer> {
 	
 	//List<DA> findByDaregstatus(String name);
-	DA findByDaemail(String username);
+	DA findByEmail(String username);
 	List<DA> findByRegistrationstatus(RegistrationStatus notVerified);
 }

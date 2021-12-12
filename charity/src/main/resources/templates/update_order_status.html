@@ -55,15 +55,17 @@
                 <h2 class="text-center"> Update Status </h2><br>
                  <!-- success message -->
                  <div th:if="${param.success}">
-                    <div class="alert alert-info">No Agent Up For Verification !</div>
+                    <div class="alert alert-info">You have not accepted any order !</div>
                 </div>
-                    
+               <form control="" class="form-group" th:action="@{redirectupdateOrderStatus}" method="post" >     
                 <table class="table table-hover">
                     <thead>
                       <tr>
                         <th>Order No</th>
                         <th>Donor Address</th>
+                        <th>Donor Contact No.</th>
                         <th>NGO Address</th>
+                        <th>NGO Contact No</th>
                         <!--<th>Adhar number</th> -->
                         <th>Action</th>
                       </tr>
@@ -72,7 +74,9 @@
                         <tr th:each="da : ${listAcceptedOrders}">
                             <td th:text="${da.id}"></td>
                             <td th:text="${da.donor_address}"></td>
+                            <td th:text="${da.donor_phoneno}"></td>
                             <td th:text="${da.ngo_address}"></td>
+                            <td th:text="${da.ngo_phoneno}"></td>
                             <!--<td th:text="${da.daadharnumber}"></td>-->
                             <td>
                                 <a  class="btn btn-outline-success"th:href="@{/OrderPickedUp/{id}(id=${da.id})}">Picked Up 
@@ -88,6 +92,7 @@
                         </tr>
                     </tbody>
                   </table>
+                  </form>
 
 
                 

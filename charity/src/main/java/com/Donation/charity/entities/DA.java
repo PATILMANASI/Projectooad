@@ -17,129 +17,59 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="Project_DAs_new_12",uniqueConstraints = @UniqueConstraint(columnNames = "daemail"))
-public class DA {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	
-	@Enumerated(EnumType.STRING)
+@Table(name="DeliveryAgent")
+public class DA extends User{
+
 	private RegistrationStatus registrationstatus=RegistrationStatus.Not_Verified;
-	private String daname;
-	private String daemail;
-	private String dapassword;
-	private String darepassword;
-	private String daphone;
-	private String dacity;
-	private String dapincode;
-	private String daaddress;
+	
 	
 	
 
 	
-	 @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	    @JoinTable(
-	        name = "DA_roles_new",
-	        joinColumns = @JoinColumn(
-	            name = "da_id", referencedColumnName = "id"),
-	        inverseJoinColumns = @JoinColumn(
-	            name = "role_id", referencedColumnName = "id"))
 	
-	 private Collection < DARole > daroles;
+
+	public DA(RegistrationStatus registrationstatus,String name, String email, String password, String repassword, String city, String phonenumber,
+			String pincode, String address, Collection<UserRole> userroles) {
+		super(name, email, password, repassword, city, phonenumber, pincode, address, userroles);
+		// TODO Auto-generated constructor stub
+		this.registrationstatus=registrationstatus;
 	
-	
+	}
+
+
+
+
+
+
 
 	public DA() {
 		
 	}
-	public DA(RegistrationStatus registrationstatus, String daname, String daemail,
-			String dapassword, String darepassword, String daphone, String dacity, String dapincode, String daaddress,
-			Collection<DARole> daroles) {
-		super();
-		this.registrationstatus=registrationstatus;
-		this.daname = daname;
-		
-		this.daemail = daemail;
-		this.dapassword = dapassword;
-		this.darepassword = darepassword;
-		this.daphone = daphone;
-		this.dacity = dacity;
-		this.dapincode = dapincode;
-		this.daaddress = daaddress;
-		this.daroles = daroles;
-	}
 
-	
-	
 
-	
+
+
+
+
+
+	/**
+	 * @return the registrationstatus
+	 */
 	public RegistrationStatus getRegistrationstatus() {
 		return registrationstatus;
 	}
+
+
+
+
+
+
+
+	/**
+	 * @param registrationstatus the registrationstatus to set
+	 */
 	public void setRegistrationstatus(RegistrationStatus registrationstatus) {
 		this.registrationstatus = registrationstatus;
 	}
-	public String getDaname() {
-		return daname;
-	}
-	public void setDaname(String daname) {
-		this.daname = daname;
-	}
-
-	public String getDaemail() {
-		return daemail;
-	}
-	public void setDaemail(String daemail) {
-		this.daemail = daemail;
-	}
-	public String getDapassword() {
-		return dapassword;
-	}
-	public void setDapassword(String dapassword) {
-		this.dapassword = dapassword;
-	}
-	public String getDarepassword() {
-		return darepassword;
-	}
-	public void setDarepassword(String darepassword) {
-		this.darepassword = darepassword;
-	}
-	public String getDaphone() {
-		return daphone;
-	}
-	public void setDaphone(String daphone) {
-		this.daphone = daphone;
-	}
-	public String getDacity() {
-		return dacity;
-	}
-	public void setDacity(String dacity) {
-		this.dacity = dacity;
-	}
-	public String getDapincode() {
-		return dapincode;
-	}
-	public void setDapincode(String dapincode) {
-		this.dapincode = dapincode;
-	}
-	public String getDaaddress() {
-		return daaddress;
-	}
-	public void setDaaddress(String daaddress) {
-		this.daaddress = daaddress;
-	}
-	public Collection<DARole> getDaroles() {
-		return daroles;
-	}
-	public void setDaroles(Collection<DARole> daroles) {
-		this.daroles = daroles;
-	}
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
+	
 }

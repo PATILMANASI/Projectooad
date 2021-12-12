@@ -18,11 +18,12 @@ import org.springframework.stereotype.Service;
 
 import com.Donation.charity.entities.CompleteDonationDetails;
 import com.Donation.charity.entities.DA;
-import com.Donation.charity.entities.DARole;
+
 import com.Donation.charity.entities.Donation;
 import com.Donation.charity.entities.DonationStatus;
 import com.Donation.charity.entities.NGO;
 import com.Donation.charity.entities.RegistrationStatus;
+import com.Donation.charity.entities.UserRole;
 import com.Donation.charity.repository.CompleteDonationDetailsRepository;
 import com.Donation.charity.repository.DARepositoryService;
 import com.Donation.charity.repository.DonationRepositoryService;
@@ -43,6 +44,8 @@ public class DAServiceImpl implements DAService {
 	@Autowired 
 	private DonorService donorservice;
 	
+
+	
 	
 	@Autowired
 	@Lazy
@@ -50,20 +53,20 @@ public class DAServiceImpl implements DAService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		DA da = darepo.findByDaemail(username);
+		DA da = darepo.findByEmail(username);
         if (da == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
         if((da.getRegistrationstatus()).equals(RegistrationStatus.Not_Verified) ){
         	throw new UsernameNotFoundException("Not verified.");
         }
-        return new org.springframework.security.core.userdetails.User(da.getDaemail(),
-            da.getDapassword(),
-            mapRolesToAuthorities(da.getDaroles()));
+        return new org.springframework.security.core.userdetails.User(da.getEmail(),
+            da.getPassword(),
+            mapRolesToAuthorities(da.getUserroles()));
 	}
 
-	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<DARole> daroles) {
-		 return daroles.stream()
+	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<UserRole> collection) {
+		 return collection.stream()
 		            .map(role -> new SimpleGrantedAuthority(role.getUsername()))
 		            .collect(Collectors.toList());
 	}
@@ -73,7 +76,7 @@ public class DAServiceImpl implements DAService {
 		
 		@Override
 		public DA saveDADetails(DA dareg) {
-			DA da=new DA(dareg.getRegistrationstatus(),dareg.getDaname(),dareg.getDaemail(),passwordEncoder.encode(dareg.getDapassword()),dareg.getDarepassword(),dareg.getDaphone(),dareg.getDacity(),dareg.getDapincode(),dareg.getDaaddress(),Arrays.asList(new DARole("USER")));
+			DA da=new DA(dareg.getRegistrationstatus(),dareg.getName(),dareg.getEmail(),passwordEncoder.encode(dareg.getPassword()),dareg.getRepassword(),dareg.getCity(),dareg.getPhonenumber(),dareg.getPincode(),dareg.getAddress(),Arrays.asList(new UserRole("ROLE USER")));
 			return darepo.save(da);
 		}
 
@@ -88,8 +91,8 @@ public class DAServiceImpl implements DAService {
 		
 			   String daemail= obj.getUsername();
 			
-			DA da  = darepo.findByDaemail(daemail);
-			cityname=da.getDacity();
+			DA da  = darepo.findByEmail(daemail);
+			cityname=da.getCity();
 			
 		
 			
@@ -100,25 +103,26 @@ public class DAServiceImpl implements DAService {
 		@Override
 		public void bookOrder(int id) {
 			// TODO Auto-generated method stub
-			Optional<CompleteDonationDetails> optional = repo.findById(id);
-			CompleteDonationDetails cdetails=null;
-			if (optional.isPresent()) {
-				cdetails = optional.get();
-			}
+			
 			UserDetails obj = donorservice.getLoggedInUser();
 			   String daemail= obj.getUsername();
-			   DA da  = darepo.findByDaemail(daemail);
-			  
-			   cdetails.setDa_name(da.getDaname());
+			   DA da  = darepo.findByEmail(daemail);
+			   Optional<CompleteDonationDetails> optional = repo.findById(id);
+				CompleteDonationDetails cdetails=null;
+				if (optional.isPresent()) {
+					cdetails = optional.get();
+				} 
+			   cdetails.setDa_name(da.getName());
 			   cdetails.setDaid(da.getId());
 			   cdetails.setDonationstatus(com.Donation.charity.entities.DonationStatus.Order_Accepted);
+			   repo.save(cdetails);
 			   Optional<Donation> optional1=donationrepo.findById(cdetails.getDonation_id());
 			   Donation d=null;
 			   if (optional1.isPresent()) {
 					d = optional1.get();
-					d.setDa_id(cdetails.getDaid());
+					d.setDaid(cdetails.getDaid());
 				}
-			   repo.save(cdetails);
+			   donationrepo.save(d);
 		}
 		
 
@@ -132,7 +136,7 @@ public class DAServiceImpl implements DAService {
 			   UserDetails userPrincipal = (UserDetails)authentication.getPrincipal(); 
 			   String daemail= userPrincipal.getUsername();
 			
-			DA da  = darepo.findByDaemail(daemail);
+			DA da  = darepo.findByEmail(daemail);
 			da_id=da.getId();
 			
 			}
@@ -149,13 +153,19 @@ public class DAServiceImpl implements DAService {
 			}
 			UserDetails obj = donorservice.getLoggedInUser(); 
 			   String daemail= obj.getUsername();
-			   DA da  = darepo.findByDaemail(daemail);
-			  
+			   DA da  = darepo.findByEmail(daemail);
 			  
 			   cdetails.setDonationstatus(DonationStatus.Picked_up);
-			  
-		
 			   repo.save(cdetails);
+			   Optional<Donation> optional1=donationrepo.findById(cdetails.getDonation_id());
+			   Donation d=null;
+			   if (optional1.isPresent()) {
+					d = optional1.get();
+					d.setDonationstatus(DonationStatus.Picked_up);
+				}
+			   donationrepo.save(d);
+		
+			   
 		}
 
 		@Override
@@ -169,13 +179,20 @@ public class DAServiceImpl implements DAService {
 			}
 			UserDetails obj = donorservice.getLoggedInUser();
 			   String daemail= obj.getUsername();
-			   DA da  = darepo.findByDaemail(daemail);
+			   DA da  = darepo.findByEmail(daemail);
 			  
 			  
 			   cdetails.setDonationstatus(DonationStatus.Delivered);
 			  
 		
 			   repo.save(cdetails);
+			   Donation d=null;
+			   Optional<Donation> optional1=donationrepo.findById(cdetails.getDonation_id());
+			   if (optional1.isPresent()) {
+					d = optional1.get();
+					d.setDonationstatus(DonationStatus.Delivered);
+				}
+			   donationrepo.save(d);
 			
 		}
 			

@@ -19,15 +19,15 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-@Table(name="DonationDetailsNewTable_12")
+@Table(name="DonationTable")
 public class Donation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	private int donor_id;
-	private int ngo_id;
-	private int da_id;
+	private int donorid;
+	private int ngoid;
+	private int daid;
 	
 	private String description;
 	
@@ -60,27 +60,28 @@ public class Donation {
 
 	
 
-	public int getDonor_id() {
-		return donor_id;
+	public int getDonorid() {
+		return donorid;
 	}
 
 
 
-	public void setDonor_id(int donor_id) {
-		this.donor_id = donor_id;
+	public void setDonorid(int donorid) {
+		this.donorid = donorid;
 	}
 
 
 
-	public Donation(int donor_id, String description, String othercategory, String comment,
-			DonationCategory donationcategory,String city) {
+	public Donation(int donorid, String description, String othercategory, String comment,
+			DonationCategory donationcategory,String city,DonationStatus donationstatus) {
 		super();
-		this.donor_id = donor_id;
+		this.donorid = donorid;
 		this.description = description;
 		this.othercategory = othercategory;
 		this.comment = comment;
 		this.donationcategory = donationcategory;
 		this.city=city;
+		this.donationstatus=this.donationstatus;
 
 	}
 
@@ -145,28 +146,28 @@ public class Donation {
 
 
 	
-	public int getNgo_id() {
-		return ngo_id;
+	public int getNgoid() {
+		return ngoid;
 	}
 
 
 
 
-	public void setNgo_id(int ngo_id) {
-		this.ngo_id = ngo_id;
+	public void setNgoid(int ngoid) {
+		this.ngoid = ngoid;
 	}
 
 
 
 	
-	public int getDa_id() {
-		return da_id;
+	public int getDaid() {
+		return daid;
 	}
 
 
 
-	public void setDa_id(int da_id) {
-		this.da_id = da_id;
+	public void setDaid(int daid) {
+		this.daid = daid;
 	}
 
 

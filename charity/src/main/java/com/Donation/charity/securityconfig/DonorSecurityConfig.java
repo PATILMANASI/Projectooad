@@ -35,7 +35,7 @@ public class DonorSecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/","/donorsignin**","/admin**","/verifyNGO**","/verifyDA**","/DAlogin","/dasignin","/ngologin","/ngosignin","/donorsignin","/markDAVerified/{id}","/markNGOVerified/{id}",
                 "/registration**","redirect:/verifyNGO","/viewDonation","/DAhome","/AdminHome","/verifyNGO","/viewOrders",
                 "/js/**","/DisplayNoOrders","/verifyDA","/DisplayNoDAs","/About","/NGOHome","/feedbackform","/viewFeedback",
-                "/css/**","/NoNGOAvailable","/markNGORejected/{id}","/markDARejected/{id}",
+                "/css/**","/NoNGOAvailable","/markNGORejected/{id}","/markDARejected/{id}","/markDAVerified/{id}","/markDARejected/{id}",
                 "/images/**").permitAll()
 //                "/webjars/**").permitAll()
             .anyRequest().authenticated()
