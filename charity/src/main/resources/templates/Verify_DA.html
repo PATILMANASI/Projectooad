@@ -60,6 +60,7 @@
                       <tr>
                         <th>Name</th>
                         <th>Address</th>
+                        <th>Aadhar Number</th>
                         <!--<th>Adhar number</th> -->
                         <th>Action</th>
                       </tr>
@@ -68,6 +69,7 @@
                         <tr th:each="da : ${listDAs}">
                             <td th:text="${da.name}"></td>
                             <td th:text="${da.address}"></td>
+                            <td th:text="${da.aadharnumber}"></td>
                             <!--<td th:text="${da.daadharnumber}"></td>-->
                             <td>
                                 <a  class="btn btn-outline-success"th:href="@{/markDAVerified/{id}(id=${da.id})}">Accept 

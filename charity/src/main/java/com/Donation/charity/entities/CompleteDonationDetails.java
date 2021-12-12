@@ -14,7 +14,7 @@ import javax.persistence.UniqueConstraint;
 
 
 @Entity
-@Table(name="CompleteDonationDetails_1")
+@Table(name="CompleteDonationDetails")
 public class CompleteDonationDetails {
 	public int getId() {
 		return id;

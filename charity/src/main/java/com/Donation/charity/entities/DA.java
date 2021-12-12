@@ -22,6 +22,7 @@ public class DA extends User{
 	@Enumerated(EnumType.STRING)
 	private RegistrationStatus registrationstatus=RegistrationStatus.Not_Verified;
 	
+	private String aadharnumber;
 	
 	
 
@@ -29,10 +30,11 @@ public class DA extends User{
 	
 
 	public DA(RegistrationStatus registrationstatus,String name, String email, String password, String repassword, String city, String phonenumber,
-			String pincode, String address, Collection<UserRole> userroles) {
+			String pincode, String address, Collection<UserRole> userroles,String aadharnumber) {
 		super(name, email, password, repassword, city, phonenumber, pincode, address, userroles);
 		// TODO Auto-generated constructor stub
 		this.registrationstatus=registrationstatus;
+		this.aadharnumber=aadharnumber;
 	
 	}
 
@@ -70,6 +72,32 @@ public class DA extends User{
 	 */
 	public void setRegistrationstatus(RegistrationStatus registrationstatus) {
 		this.registrationstatus = registrationstatus;
+	}
+
+
+
+
+
+
+
+	/**
+	 * @return the aadharnumber
+	 */
+	public String getAadharnumber() {
+		return aadharnumber;
+	}
+
+
+
+
+
+
+
+	/**
+	 * @param aadharnumber the aadharnumber to set
+	 */
+	public void setAadharnumber(String aadharnumber) {
+		this.aadharnumber = aadharnumber;
 	}
 	
 }

@@ -80,7 +80,7 @@ public class DAServiceImpl implements DAService {
 		
 		@Override
 		public DA saveDADetails(DA dareg) {
-			DA da=new DA(dareg.getRegistrationstatus(),dareg.getName(),dareg.getEmail(),passwordEncoder.encode(dareg.getPassword()),dareg.getRepassword(),dareg.getCity(),dareg.getPhonenumber(),dareg.getPincode(),dareg.getAddress(),Arrays.asList(new UserRole("ROLE USER")));
+			DA da=new DA(dareg.getRegistrationstatus(),dareg.getName(),dareg.getEmail(),passwordEncoder.encode(dareg.getPassword()),dareg.getRepassword(),dareg.getCity(),dareg.getPhonenumber(),dareg.getPincode(),dareg.getAddress(),Arrays.asList(new UserRole("ROLE USER")),dareg.getAadharnumber());
 			return darepo.save(da);
 		}
 

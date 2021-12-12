@@ -16,7 +16,7 @@ import com.Donation.charity.service.DAService;
 
 @Configuration
 @EnableWebSecurity
-@Order(3)
+@Order(1)
 public class DASecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
     private DAService daservice;

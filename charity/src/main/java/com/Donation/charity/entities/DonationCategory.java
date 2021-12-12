@@ -9,6 +9,7 @@ public enum DonationCategory {
 	Clothes,
 	Books,
 	Gadgets,
-	Utensils
+	Utensils,
+	Blankets
 
 }

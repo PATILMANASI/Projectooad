@@ -26,7 +26,7 @@ import javax.persistence.UniqueConstraint;
 
 
 @Entity
-@Table(name="InheritanceDonor")
+@Table(name="Donor")
 public class Donor extends User {
 
 	

@@ -24,7 +24,7 @@ import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.ColumnDefault;
 
 @Entity
-@Table(name="NGOs_")
+@Table(name="NGO")
 public class NGO extends User{
 	@Enumerated(EnumType.STRING)
 	private RegistrationStatus registrationstatus=RegistrationStatus.Not_Verified;
